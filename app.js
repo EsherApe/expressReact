@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 app.set('view engine', 'pug');
 
 // express static folder
-app.use('/static', express.static(__dirname + 'public'));
+app.use('/static', express.static(__dirname + '/public'));
 
 // queries
 app.use('*', index);
