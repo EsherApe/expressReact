@@ -13,9 +13,9 @@ app.use(morgan('dev'));
 app.set('view engine', 'pug');
 
 // express static folder
-app.use('/static', express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/client/static'));
 
-// queries
+// render index page
 app.use('*', index);
 
 // port settings

@@ -1,0 +1,12 @@
+@import "../../bower_components/normalize-css/normalize.css";
+
+body {
+  background-color: #9c96ff;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  div {
+    background-color: #000;
+  }
+}
