@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // components
-import Main from './components/main/Main';
+import Main from './components/app/App';
 import About from './components/about/About';
 import NoPage from './components/noPage/NoPage';
 
