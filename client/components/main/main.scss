@@ -1,12 +1,23 @@
-@import "../../bower_components/normalize-css/normalize.css";
+@import "../../bower_components/spectre.css/src/spectre";
+@import "../../bower_components/spectre.css/src/spectre-icons";
 
-body {
-  background-color: #9c96ff;
-  color: #fff;
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.wrapper {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  div {
-    background-color: #000;
-  }
+  height: 100%;
+}
+
+.main {
+  flex: 1 0 auto;
+}
+
+// Helpers
+.mt-4 {
+  margin-top: 4rem;
 }

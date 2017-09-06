@@ -7,8 +7,6 @@ import Main from './components/main/Main';
 import About from './components/about/About';
 import NoPage from './components/noPage/NoPage';
 
-console.log('work');
-
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
