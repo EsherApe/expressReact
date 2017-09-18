@@ -13,9 +13,9 @@ class Messages extends React.Component {
 
                 </div>
                 <div className="panel-body">
-                    <Message/>
-                    <Message/>
-                    <Message/>
+                    {this.props.messages.map((item, index) => {
+                        return <Message message={item} key={index}/>
+                    })}
                 </div>
                 <div className="panel-footer">
                     <button className="btn btn-primary btn-block">Clear</button>

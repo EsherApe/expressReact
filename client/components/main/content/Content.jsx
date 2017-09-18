@@ -15,8 +15,8 @@ class Content extends React.Component {
         return (
             <section className="column col-8 col-xs-12">
                 {this.props.content === 'profile' && <Profile/>}
-                {this.props.content === 'messages' && <Messages/>}
-                {this.props.content === 'notifications' && <Notifications/>}
+                {this.props.content === 'messages' && <Messages messages={this.props.messages}/>}
+                {this.props.content === 'notifications' && <Notifications notifications={this.props.notifications}/>}
                 {this.props.content === 'settings' && <Settings/>}
             </section>
         )
@@ -25,7 +25,9 @@ class Content extends React.Component {
 
 export default connect(
     state => ({
-        content: state.content.get('contentName')
+        content: state.content.get('contentName'),
+        messages: state.messages.get('messages'),
+        notifications: state.notifications.get('notifications')
     }),
     dispatch => ({
 

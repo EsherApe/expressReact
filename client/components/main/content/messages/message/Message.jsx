@@ -11,12 +11,12 @@ class Message extends React.Component {
                 <div className="tile">
                     <div className="tile-icon">
                         <figure className="avatar avatar-lg">
-                            <img src="/static/img/avatar-4.png" alt="Avatar"/>
+                            <img src={this.props.message.avatar} alt="Avatar"/>
                         </figure>
                     </div>
                     <div className="tile-content">
-                        <p className="tile-title">Billy Bob</p>
-                        <p className="tile-subtitle text-gray">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
+                        <p className="tile-title">{this.props.message.author}</p>
+                        <p className="tile-subtitle text-gray">{this.props.message.text}</p>
                         <p>
                             <button className="btn btn-primary btn-sm mr-1">Join</button>
                             <button className="btn btn-sm bg-error text-light">Remove</button>

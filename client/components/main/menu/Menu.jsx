@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 class Menu extends React.Component {
     constructor(props) {
@@ -26,28 +26,38 @@ class Menu extends React.Component {
                     </li>
                     <li className="divider"> </li>
                     <li className="menu-item">
-                        <a href="#" onClick={this.openMenuItem.bind(this, 'profile')}>
+                        <a href="#"
+                           className={this.props.content === 'profile' ? 'active' : ''}
+                           onClick={this.openMenuItem.bind(this, 'profile')}>
                             My profile
                         </a>
                     </li>
                     <li className="menu-item">
+                        {this.props.messages &&
                         <div className="menu-badge">
-                            <label className="label label-primary">6</label>
-                        </div>
-                        <a href="#" className="" onClick={this.openMenuItem.bind(this, 'messages')}>
+                            <label className="label label-primary">{this.props.messages.length}</label>
+                        </div>}
+                        <a href="#"
+                           className={this.props.content === 'messages' ? 'active' : ''}
+                           onClick={this.openMenuItem.bind(this, 'messages')}>
                             Messages
                         </a>
                     </li>
                     <li className="menu-item">
+                        {this.props.notifications &&
                         <div className="menu-badge">
-                            <label className="label label-primary">3</label>
-                        </div>
-                        <a href="#" className="active" onClick={this.openMenuItem.bind(this, 'notifications')}>
+                            <label className="label label-primary">{this.props.notifications.length}</label>
+                        </div>}
+                        <a href="#"
+                           className={this.props.content === 'notifications' ? 'active' : ''}
+                           onClick={this.openMenuItem.bind(this, 'notifications')}>
                             Notifications
                         </a>
                     </li>
                     <li className="menu-item">
-                        <a href="#" onClick={this.openMenuItem.bind(this, 'settings')}>
+                        <a href="#"
+                           className={this.props.content === 'settings' ? 'active' : ''}
+                           onClick={this.openMenuItem.bind(this, 'settings')}>
                             Settings
                         </a>
                     </li>
@@ -84,7 +94,9 @@ class Menu extends React.Component {
 
 export default connect(
     state => ({
-
+        content: state.content.get('contentName'),
+        messages: state.messages.get('messages'),
+        notifications: state.notifications.get('notifications')
     }),
     dispatch => ({
         onSwitchPage: contentName => {

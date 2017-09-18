@@ -13,9 +13,9 @@ class Notifications extends React.Component {
 
                 </div>
                 <div className="panel-body">
-                    <Notification/>
-                    <Notification/>
-                    <Notification/>
+                    {this.props.notifications.map((item, index) => {
+                        return <Notification notification={item} key={index}/>
+                    })}
                 </div>
                 <div className="panel-footer">
                     <button className="btn btn-primary btn-block">Clear</button>

@@ -16,7 +16,7 @@ class Notification extends React.Component {
                     </div>
                     <div className="tile-content">
                         <p className="tile-title">The S.H.I.E.L.D.</p>
-                        <p className="tile-subtitle text-gray">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
+                        <p className="tile-subtitle text-gray">{this.props.notification.text}</p>
                         <p>
                             <button className="btn btn-primary btn-sm mr-1">Join</button>
                             <button className="btn btn-sm">Contact</button>
