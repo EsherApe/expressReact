@@ -31,7 +31,7 @@ class LogIn extends React.Component {
                                         <span>If you haven't registered</span>
                                     </div>
                                     <div className="card-footer">
-                                        <a href="#" className="btn btn-primary">Sign In</a>
+                                        <a href="#" className="btn btn-primary">Sign Up</a>
                                     </div>
                                 </div>
                             </div>

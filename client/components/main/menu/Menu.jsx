@@ -1,14 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class Menu extends React.Component {
     constructor(props) {
         super(props);
-
-        this.openMenuItem = this.openMenuItem;
     }
 
-    openMenuItem(name) {
-        console.log(name);
+    openMenuItem(pageName) {
+        this.props.onSwitchPage(pageName)
     }
 
     render() {
@@ -83,4 +82,13 @@ class Menu extends React.Component {
     }
 }
 
-export default Menu;
+export default connect(
+    state => ({
+        activePage: state.get('content')
+    }),
+    dispatch => ({
+        onSwitchPage: pageName => {
+            dispatch({type: 'SWITCH_CONTENT', content: pageName})
+        }
+    })
+)(Menu);

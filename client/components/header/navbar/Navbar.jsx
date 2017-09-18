@@ -8,7 +8,7 @@ class Navbar extends React.Component {
                     <header className="navbar mt-2">
                         <section className="navbar-section">
                             <a href="#" className="btn btn-link">Docs</a>
-                            <a href="#" className="btn btn-link">Examples</a>
+                            <a href="/about" className="btn btn-link">About</a>
                         </section>
                         <section className="navbar-center">
                             <a href="#">
