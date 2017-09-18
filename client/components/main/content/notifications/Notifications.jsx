@@ -9,8 +9,8 @@ class Notifications extends React.Component {
     render() {
         return (
             <div className="panel profile-panel">
-                <div className="panel-header text-center">
-
+                <div className="panel-header text-center text-primary">
+                    You have new notifications
                 </div>
                 <div className="panel-body">
                     {this.props.notifications.map((item, index) => {

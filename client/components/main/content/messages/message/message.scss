@@ -1,0 +1,13 @@
+.message {
+  &__new {
+    background-color: #e2f3ff;
+    border-radius: 0.05rem;
+  }
+  .tile {
+    padding: 5px;
+    margin: 0;
+  }
+  .tile-subtitle {
+    cursor: pointer;
+  }
+}

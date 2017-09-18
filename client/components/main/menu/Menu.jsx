@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 class Menu extends React.Component {
     constructor(props) {
         super(props);
+        this.newMessages = this.props.messages.filter(message => {return message.isNew});
+        this.newNotifications = this.props.notifications.filter(notification => {return notification.isNew});
     }
 
     openMenuItem(contentName) {
@@ -35,7 +37,7 @@ class Menu extends React.Component {
                     <li className="menu-item">
                         {this.props.messages &&
                         <div className="menu-badge">
-                            <label className="label label-primary">{this.props.messages.length}</label>
+                            <label className="label label-primary">{this.newMessages.length}</label>
                         </div>}
                         <a href="#"
                            className={this.props.content === 'messages' ? 'active' : ''}
@@ -46,7 +48,7 @@ class Menu extends React.Component {
                     <li className="menu-item">
                         {this.props.notifications &&
                         <div className="menu-badge">
-                            <label className="label label-primary">{this.props.notifications.length}</label>
+                            <label className="label label-primary">{this.newNotifications.length}</label>
                         </div>}
                         <a href="#"
                            className={this.props.content === 'notifications' ? 'active' : ''}

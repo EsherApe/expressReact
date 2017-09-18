@@ -6,6 +6,7 @@ import Profile from './profile/Profile';
 import Notifications from './notifications/Notifications';
 import Messages from './messages/Messages';
 import Settings from './settings/Settings';
+import UserPage from './userPage/UserPage';
 
 class Content extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class Content extends React.Component {
                 {this.props.content === 'messages' && <Messages messages={this.props.messages}/>}
                 {this.props.content === 'notifications' && <Notifications notifications={this.props.notifications}/>}
                 {this.props.content === 'settings' && <Settings/>}
+                {this.props.content === 'userPage' && <UserPage/>}
             </section>
         )
     }

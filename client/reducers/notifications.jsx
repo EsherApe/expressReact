@@ -4,11 +4,18 @@ const initialState = {
     notifications: [
         {
             id: 0,
-            text: 'The Strategic Homeland Intervention, Enforcement, and Logistics Division...'
+            text: 'The Strategic Homeland Intervention, Enforcement, and Logistics Division...',
+            isNew: true
         },
         {
             id: 1,
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            isNew: true
+        },
+        {
+            id: 1,
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            isNew: false
         }
     ]
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import './notification.scss';
 
 class Notification extends React.Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class Notification extends React.Component {
 
     render() {
         return (
-            <div className='notification'>
+            <div className={this.props.notification.isNew ? 'notification notification__new' : 'notification'}>
                 <div className="tile">
                     <div className="tile-icon">
                         <figure className="avatar avatar-lg">

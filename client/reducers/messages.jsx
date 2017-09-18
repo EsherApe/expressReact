@@ -6,19 +6,22 @@ const initialState = {
             id: 0,
             avatar: '/static/img/avatar-1.png',
             text: 'The Strategic Homeland Intervention, Enforcement, and Logistics Division...',
-            author: 'Billy Bob'
+            author: 'Billy Bob',
+            isNew: true
         },
         {
             id: 1,
             avatar: '/static/img/avatar-2.png',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            author: 'Elvis Presley'
+            author: 'Elvis Presley',
+            isNew: false
         },
         {
             id: 2,
             avatar: '/static/img/avatar-3.png',
             text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            author: 'Madonna'
+            author: 'Madonna',
+            isNew: false
         }
     ]
 };
