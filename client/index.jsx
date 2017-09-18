@@ -1,25 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Map } from 'immutable';
 
 import {createStore} from 'redux';
 import { Provider } from 'react-redux';
+import reducer from './reducers';
 
 //====================================
-//reducer function
-const initialState = {
-    content: 'profile'
-};
-
-function reducer(state = Map(initialState), action) {
-    if (action.type === 'SWITCH_CONTENT') {
-        return state.set('content', action.content);
-    }
-    return state;
-}
-
-const store = createStore(reducer);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 //============================================================
 
 // components

@@ -12,7 +12,6 @@ class Content extends React.Component {
         super(props);
     }
     render() {
-        console.log(this.props);
         return (
             <section className="column col-8 col-xs-12">
                 {this.props.content === 'profile' && <Profile/>}
@@ -26,7 +25,7 @@ class Content extends React.Component {
 
 export default connect(
     state => ({
-        content: state.get('content')
+        content: state.content.get('contentName')
     }),
     dispatch => ({
 

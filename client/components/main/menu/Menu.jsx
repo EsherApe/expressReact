@@ -6,8 +6,8 @@ class Menu extends React.Component {
         super(props);
     }
 
-    openMenuItem(pageName) {
-        this.props.onSwitchPage(pageName)
+    openMenuItem(contentName) {
+        this.props.onSwitchPage(contentName)
     }
 
     render() {
@@ -84,11 +84,11 @@ class Menu extends React.Component {
 
 export default connect(
     state => ({
-        activePage: state.get('content')
+
     }),
     dispatch => ({
-        onSwitchPage: pageName => {
-            dispatch({type: 'SWITCH_CONTENT', content: pageName})
+        onSwitchPage: contentName => {
+            dispatch({type: 'SWITCH_CONTENT', contentName: contentName})
         }
     })
 )(Menu);
