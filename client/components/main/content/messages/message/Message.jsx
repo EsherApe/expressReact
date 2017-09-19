@@ -1,16 +1,15 @@
 import React from 'react';
 import './message.scss';
+import { connect } from 'react-redux';
 
 class Message extends React.Component {
     constructor(props) {
         super(props);
-        this.showUser = this.showUser.bind(this);
     }
 
-    showUser(e) {
+    showUser(userPage, userId, e) {
         e.preventDefault();
-        this.setState({contentName: 'userPage'});
-        console.log('user');
+        this.props.onSwitchPage(userPage, userId)
     }
 
     render() {
@@ -23,7 +22,7 @@ class Message extends React.Component {
                         </figure>
                     </div>
                     <div className="tile-content">
-                        <a href='#' onClick={this.showUser} className="tile-title">{this.props.message.author}</a>
+                        <a href='#' onClick={this.showUser.bind(this, 'userPage', this.props.message.authorId)} className="tile-title">{this.props.message.author}</a>
                         <p className="tile-subtitle text-gray">{this.props.message.text}</p>
                         <p>
                             <button className="btn btn-primary btn-sm mr-1">Join</button>
@@ -37,4 +36,14 @@ class Message extends React.Component {
     }
 }
 
-export default Message;
+export default connect(
+    state => ({
+        content: state.content.get('contentName'),
+    }),
+    dispatch => ({
+        onSwitchPage: (contentName, userId) => {
+            dispatch({type: 'SWITCH_CONTENT', contentName: contentName});
+            dispatch({type: 'SHOW_USER', userId: userId});
+        }
+    })
+)(Message);

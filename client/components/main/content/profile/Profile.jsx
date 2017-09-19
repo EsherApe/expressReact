@@ -2,10 +2,6 @@ import React from 'react';
 import './profile.scss';
 
 class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="panel profile-panel">

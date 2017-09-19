@@ -16,10 +16,10 @@ class Content extends React.Component {
         return (
             <section className="column col-8 col-xs-12">
                 {this.props.content === 'profile' && <Profile/>}
-                {this.props.content === 'messages' && <Messages messages={this.props.messages}/>}
-                {this.props.content === 'notifications' && <Notifications notifications={this.props.notifications}/>}
+                {this.props.content === 'messagesList' && <Messages messages={this.props.messages}/>}
+                {this.props.content === 'notificationsList' && <Notifications notifications={this.props.notifications}/>}
                 {this.props.content === 'settings' && <Settings/>}
-                {this.props.content === 'userPage' && <UserPage/>}
+                {this.props.content === 'userPage' && <UserPage userId={this.props.userId}/>}
             </section>
         )
     }
@@ -28,8 +28,9 @@ class Content extends React.Component {
 export default connect(
     state => ({
         content: state.content.get('contentName'),
-        messages: state.messages.get('messages'),
-        notifications: state.notifications.get('notifications')
+        messages: state.messages.get('messagesList'),
+        notifications: state.notifications.get('notificationsList'),
+        userId: state.users.get('showUserId'),
     }),
     dispatch => ({
 

@@ -41,7 +41,7 @@ class Menu extends React.Component {
                         </div>}
                         <a href="#"
                            className={this.props.content === 'messages' ? 'active' : ''}
-                           onClick={this.openMenuItem.bind(this, 'messages')}>
+                           onClick={this.openMenuItem.bind(this, 'messagesList')}>
                             Messages
                         </a>
                     </li>
@@ -52,7 +52,7 @@ class Menu extends React.Component {
                         </div>}
                         <a href="#"
                            className={this.props.content === 'notifications' ? 'active' : ''}
-                           onClick={this.openMenuItem.bind(this, 'notifications')}>
+                           onClick={this.openMenuItem.bind(this, 'notificationsList')}>
                             Notifications
                         </a>
                     </li>
@@ -97,8 +97,8 @@ class Menu extends React.Component {
 export default connect(
     state => ({
         content: state.content.get('contentName'),
-        messages: state.messages.get('messages'),
-        notifications: state.notifications.get('notifications')
+        messages: state.messages.get('messagesList'),
+        notifications: state.notifications.get('notificationsList')
     }),
     dispatch => ({
         onSwitchPage: contentName => {

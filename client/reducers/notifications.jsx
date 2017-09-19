@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 
 const initialState = {
-    notifications: [
+    notificationsList: [
         {
             id: 0,
             text: 'The Strategic Homeland Intervention, Enforcement, and Logistics Division...',
