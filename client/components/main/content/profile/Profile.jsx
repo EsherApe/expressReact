@@ -1,7 +1,24 @@
 import React from 'react';
+
+//components
+import Contacts from './contacts/Contacts';
+import PersonalInfo from './personalInfo/PersonalInfo';
+import Friends from './friends/Friends';
+//styles
 import './profile.scss';
 
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeTab: 'contacts'
+        }
+    }
+
+    switchTabs(tabName) {
+        this.setState({activeTab: tabName});
+    }
+
     render() {
         return (
             <div className="panel profile-panel">
@@ -14,51 +31,30 @@ class Profile extends React.Component {
                 </div>
                 <nav className="panel-nav">
                     <ul className="tab tab-block">
-                        <li className="tab-item active">
+                        <li className={this.state.activeTab === 'contacts' ? "tab-item active" : "tab-item"}
+                            onClick={this.switchTabs.bind(this, 'contacts')}>
                             <a href="#">
-                                Profile
+                                Contacts
                             </a>
                         </li>
-                        <li className="tab-item">
+                        <li className={this.state.activeTab === 'personalInfo' ? "tab-item active" : "tab-item"}
+                            onClick={this.switchTabs.bind(this, 'personalInfo')}>
                             <a href="#">
-                                Files
+                                Personal Info
                             </a>
                         </li>
-                        <li className="tab-item">
+                        <li className={this.state.activeTab === 'friends' ? "tab-item active" : "tab-item"}
+                            onClick={this.switchTabs.bind(this, 'friends')}>
                             <a href="#">
-                                Tasks
+                                Friends
                             </a>
                         </li>
                     </ul>
                 </nav>
                 <div className="panel-body">
-                    <div className="tile tile-centered">
-                        <div className="tile-content">
-                            <div className="tile-title">E-mail</div>
-                            <div className="tile-subtitle">bruce.banner@hulk.com</div>
-                        </div>
-                        <div className="tile-action">
-                            <button className="btn btn-link btn-action btn-lg"><i className="icon icon-edit"> </i></button>
-                        </div>
-                    </div>
-                    <div className="tile tile-centered">
-                        <div className="tile-content">
-                            <div className="tile-title">Skype</div>
-                            <div className="tile-subtitle">bruce.banner</div>
-                        </div>
-                        <div className="tile-action">
-                            <button className="btn btn-link btn-action btn-lg"><i className="icon icon-edit"> </i></button>
-                        </div>
-                    </div>
-                    <div className="tile tile-centered">
-                        <div className="tile-content">
-                            <div className="tile-title">Location</div>
-                            <div className="tile-subtitle">Dayton, Ohio</div>
-                        </div>
-                        <div className="tile-action">
-                            <button className="btn btn-link btn-action btn-lg"><i className="icon icon-edit"> </i></button>
-                        </div>
-                    </div>
+                    {this.state.activeTab === 'contacts' && <Contacts/>}
+                    {this.state.activeTab === 'personalInfo' && <PersonalInfo/>}
+                    {this.state.activeTab === 'friends' && <Friends/>}
                 </div>
                 <div className="panel-footer">
                     <button className="btn btn-primary btn-block">Save</button>

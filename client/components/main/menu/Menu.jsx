@@ -12,6 +12,10 @@ class Menu extends React.Component {
         this.props.onSwitchPage(contentName)
     }
 
+    userLogout() {
+        this.props.logout();
+    }
+
     render() {
         return (
             <section className="column col-4 col-xs-12">
@@ -64,7 +68,7 @@ class Menu extends React.Component {
                         </a>
                     </li>
                     <li className="menu-item">
-                        <a href="#">
+                        <a href="#" onClick={this.userLogout.bind(this)}>
                             Logout
                         </a>
                     </li>
@@ -103,6 +107,9 @@ export default connect(
     dispatch => ({
         onSwitchPage: contentName => {
             dispatch({type: 'SWITCH_CONTENT', contentName: contentName})
+        },
+        logout: () => {
+            dispatch({type: 'LOG_OUT', isLogin: false})
         }
     })
 )(Menu);

@@ -5,9 +5,12 @@ const initialState = {
 };
 
 function users(state = Map(initialState), action) {
-    if (action.type === 'SHOW_USER') {
-        return state.set('showUserId', action.userId);
+    switch(action.type) {
+        case 'SHOW_USER':
+            return state.set('showUserId', action.userId);
+            break;
     }
+
     return state;
 }
 

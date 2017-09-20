@@ -8,7 +8,6 @@ class Header extends React.Component {
             <header className="columns">
                 <div className="column col-12">
                     <Navbar/>
-                    <BreadCrambs/>
                 </div>
             </header>
         )

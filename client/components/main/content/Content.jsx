@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 //components
 import Profile from './profile/Profile';
@@ -24,6 +25,12 @@ class Content extends React.Component {
         )
     }
 }
+
+Content.propTypes = {
+    content: PropTypes.oneOf(['profile','messagesList','notificationsList','settings','userPage']).isRequired,
+    messages: PropTypes.array.isRequired,
+    notifications: PropTypes.array.isRequired
+};
 
 export default connect(
     state => ({

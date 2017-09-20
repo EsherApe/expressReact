@@ -1,5 +1,6 @@
 import React from 'react';
 import 'whatwg-fetch';
+import PropTypes from 'prop-types';
 
 //styles
 import './userPage.scss';
@@ -25,13 +26,9 @@ class UserPage extends React.Component {
             .then( response => {
                 return response.json()
             }).then( users => {
-                users.forEach((user, index) => {
+                users.forEach((user) => {
                     if (user.id === this.props.userId) {
-                        setTimeout(() => {
-                            this.setState({user: user, userIsLoaded: true});
-                        }, 10000);
-                        
-                        
+                        this.setState({user: user, userIsLoaded: true});
                     }
                 });
         }).catch( ex => {
@@ -49,7 +46,7 @@ class UserPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='full-size'>
                 {!this.state.userIsLoaded && <Loader/>}
                 {this.state.userIsLoaded &&
                 <div className="panel user-panel">
@@ -83,5 +80,9 @@ class UserPage extends React.Component {
         )
     }
 }
+
+UserPage.propTypes = {
+    userId: PropTypes.number.isRequired
+};
 
 export default UserPage;

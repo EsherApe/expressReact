@@ -1,6 +1,7 @@
 import React from 'react';
 import Menu from './menu/Menu';
 import Content from './content/Content';
+import './main.scss';
 
 class Main extends React.Component {
     render() {
