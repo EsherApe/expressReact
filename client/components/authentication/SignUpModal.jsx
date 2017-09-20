@@ -35,14 +35,23 @@ class SignUpModal extends React.Component {
     }
 
     validateForm() {
-
-        this.state.login = this.refs.login.value;
-
-        this.state.login ? this.setState({loginIsValid: true}) : this.setState({loginIsValid: false});
-        this.state.email ? this.setState({emailIsValid: true}) : this.setState({emailIsValid: false});
-        this.state.password ? this.setState({passwordIsValid: true}) : this.setState({passwordIsValid: false});
-        this.state.birthday ? this.setState({birthdayIsValid: true}) : this.setState({birthdayIsValid: false});
         this.state.password === this.state.repeatPassword ? this.setState({passwordsIsEqual: true}) : this.setState({passwordsIsEqual: false});
+    }
+
+    validateLogin() {
+        this.state.login ? this.setState({loginIsValid: true}) : this.setState({loginIsValid: false});
+    }
+
+    validateEmail() {
+        this.state.email ? this.setState({emailIsValid: true}) : this.setState({emailIsValid: false});
+    }
+
+    validatePassword() {
+        this.state.password ? this.setState({passwordIsValid: true}) : this.setState({passwordIsValid: false});
+    }
+
+    validateBirthday() {
+        this.state.birthday ? this.setState({birthdayIsValid: true}) : this.setState({birthdayIsValid: false});
     }
 
     render() {
@@ -59,18 +68,28 @@ class SignUpModal extends React.Component {
                             <form action="">
                                 <div className={this.state.loginIsValid ? "form-group" : "form-group has-error"}>
                                     <label className="form-label">Login</label>
-                                    <input className="form-input" type="text" ref='login' onBlur={this.validateForm}/>
+                                    <input className="form-input"
+                                           type="text"
+                                           ref='login'
+                                           onBlur={this.validateLogin.bind(this)}/>
                                     {!this.state.loginIsValid && <span className="form-input-hint">This option is required.</span>}
                                 </div>
                                 <div className={this.state.emailIsValid ? "form-group" : "form-group has-error"}>
                                     <label className="form-label">Email</label>
-                                    <input className="form-input" type="email" pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" ref='email'/>
+                                    <input className="form-input"
+                                           type="email"
+                                           pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                                           ref='email'
+                                           onBlur={this.validateEmail.bind(this)}/>
                                     {!this.state.emailIsValid && <span className="form-input-hint">This option is required.</span>}
                                     {/*<span className="form-input-hint">E-mail is invalid.</span>*/}
                                 </div>
                                 <div className={this.state.passwordIsValid ? "form-group" : "form-group has-error"}>
                                     <label className="form-label">Password</label>
-                                    <input className="form-input" type="password" ref='password'/>
+                                    <input className="form-input"
+                                           type="password"
+                                           ref='password'
+                                           onBlur={this.validatePassword.bind(this)}/>
                                     {!this.state.passwordIsValid && <span className="form-input-hint">This option is required.</span>}
                                     {/*<span className="form-input-hint">Passwords must have at least 8 characters.</span>*/}
                                 </div>
@@ -82,7 +101,10 @@ class SignUpModal extends React.Component {
                                 </div>
                                 <div className={this.state.birthdayIsValid ? "form-group" : "form-group has-error"}>
                                     <label className="form-label">Date of birth</label>
-                                    <input className="form-input" type="date" ref='birthday'/>
+                                    <input className="form-input"
+                                           type="date"
+                                           ref='birthday'
+                                           onBlur={this.validateBirthday.bind(this)}/>
                                     {!this.state.birthdayIsValid && <span className="form-input-hint">This option is required.</span>}
                                 </div>
                             </form>
