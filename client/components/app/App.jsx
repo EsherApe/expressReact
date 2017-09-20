@@ -28,13 +28,21 @@ class App extends React.Component {
     }
 }
 
-export default connect(
-    state => ({
+const mapStateToProps = state => {
+    return {
         isLogin: state.user.get('isLogin')
-    }),
-    dispatch => ({
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
         login: () => {
             dispatch({type: 'LOG_IN', isLogin: true});
         }
-    })
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
 )(App);

@@ -32,14 +32,22 @@ Content.propTypes = {
     notifications: PropTypes.array.isRequired
 };
 
-export default connect(
-    state => ({
+const mapStateToProps = state => {
+    return {
         content: state.content.get('contentName'),
         messages: state.messages.get('messagesList'),
         notifications: state.notifications.get('notificationsList'),
         userId: state.users.get('showUserId'),
-    }),
-    dispatch => ({
+    }
+};
 
-    })
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
 )(Content);

@@ -98,18 +98,26 @@ class Menu extends React.Component {
     }
 }
 
-export default connect(
-    state => ({
+const mapStateToProps = state => {
+    return {
         content: state.content.get('contentName'),
         messages: state.messages.get('messagesList'),
         notifications: state.notifications.get('notificationsList')
-    }),
-    dispatch => ({
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
         onSwitchPage: contentName => {
             dispatch({type: 'SWITCH_CONTENT', contentName: contentName})
         },
         logout: () => {
             dispatch({type: 'LOG_OUT', isLogin: false})
         }
-    })
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
 )(Menu);
