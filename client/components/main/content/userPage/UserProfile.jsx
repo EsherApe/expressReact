@@ -46,8 +46,7 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
-    email: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired
+    user: PropTypes.object.isRequired,
 };
 
 export default UserProfile;
