@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class LogInModal extends React.Component {
     constructor(props) {
@@ -42,5 +43,9 @@ class LogInModal extends React.Component {
         )
     }
 }
+
+LogInModal.propTypes = {
+    closeModal: PropTypes.func.isRequired
+};
 
 export default LogInModal

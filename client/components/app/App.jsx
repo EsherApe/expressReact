@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 //styles
 import './app.scss';
@@ -27,6 +28,11 @@ class App extends React.Component {
         )
     }
 }
+
+App.propTypes = {
+    login: PropTypes.func.isRequired,
+    isLogin: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = state => ({
     isLogin: state.user.get('isLogin')

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class SignUpModal extends React.Component {
     constructor(props) {
@@ -54,5 +55,9 @@ class SignUpModal extends React.Component {
         )
     }
 }
+
+SignUpModal.propTypes = {
+    closeModal: PropTypes.func.isRequired
+};
 
 export default SignUpModal
