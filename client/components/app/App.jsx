@@ -28,19 +28,15 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        isLogin: state.user.get('isLogin')
-    }
-};
+const mapStateToProps = state => ({
+    isLogin: state.user.get('isLogin')
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        login: () => {
-            dispatch({type: 'LOG_IN', isLogin: true});
-        }
+const mapDispatchToProps = dispatch => ({
+    login: () => {
+        dispatch({type: 'LOG_IN', isLogin: true});
     }
-};
+});
 
 export default connect(
     mapStateToProps,

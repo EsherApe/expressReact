@@ -98,24 +98,20 @@ class Menu extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        content: state.content.get('contentName'),
-        messages: state.messages.get('messagesList'),
-        notifications: state.notifications.get('notificationsList')
-    }
-};
+const mapStateToProps = state => ({
+    content: state.content.get('contentName'),
+    messages: state.messages.get('messagesList'),
+    notifications: state.notifications.get('notificationsList')
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onSwitchPage: contentName => {
-            dispatch({type: 'SWITCH_CONTENT', contentName: contentName})
-        },
-        logout: () => {
-            dispatch({type: 'LOG_OUT', isLogin: false})
-        }
+const mapDispatchToProps = dispatch => ({
+    onSwitchPage: contentName => {
+        dispatch({type: 'SWITCH_CONTENT', contentName: contentName})
+    },
+    logout: () => {
+        dispatch({type: 'LOG_OUT', isLogin: false})
     }
-};
+});
 
 export default connect(
     mapStateToProps,

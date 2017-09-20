@@ -36,20 +36,16 @@ class Message extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        content: state.content.get('contentName')
-    }
-};
+const mapStateToProps = state => ({
+    content: state.content.get('contentName')
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onSwitchPage: (contentName, userId) => {
-            dispatch({type: 'SWITCH_CONTENT', contentName: contentName});
-            dispatch({type: 'SHOW_USER', userId: userId});
-        }
+const mapDispatchToProps = dispatch => ({
+    onSwitchPage: (contentName, userId) => {
+        dispatch({type: 'SWITCH_CONTENT', contentName: contentName});
+        dispatch({type: 'SHOW_USER', userId: userId});
     }
-};
+});
 
 export default connect(
     mapStateToProps,

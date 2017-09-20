@@ -32,20 +32,14 @@ Content.propTypes = {
     notifications: PropTypes.array.isRequired
 };
 
-const mapStateToProps = state => {
-    return {
-        content: state.content.get('contentName'),
-        messages: state.messages.get('messagesList'),
-        notifications: state.notifications.get('notificationsList'),
-        userId: state.users.get('showUserId'),
-    }
-};
+const mapStateToProps = state => ({
+    content: state.content.get('contentName'),
+    messages: state.messages.get('messagesList'),
+    notifications: state.notifications.get('notificationsList'),
+    userId: state.users.get('showUserId'),
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-
-    }
-};
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
     mapStateToProps,
