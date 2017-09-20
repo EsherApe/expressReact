@@ -5,10 +5,44 @@ class SignUpModal extends React.Component {
     constructor(props) {
         super(props);
         this.closeModal = this.closeModal.bind(this);
+        this.submitSignUpForm = this.submitSignUpForm.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.state = {
+            loginIsValid: true,
+            passwordIsValid: true,
+            emailIsValid: true,
+            passwordsIsEqual: true,
+            birthdayIsValid: true,
+            login: null,
+            email: null,
+            password: null,
+            repeatPassword: null,
+            birthday: null
+        }
     }
 
     closeModal() {
         this.props.closeModal();
+    }
+
+    submitSignUpForm() {
+        this.setState({
+            login: this.refs.login.value,
+            password: this.refs.password.value,
+            repeatPassword: this.refs.repeatPassword.value,
+            birthday: this.refs.birthday.value
+        });
+    }
+
+    validateForm() {
+
+        this.state.login = this.refs.login.value;
+
+        this.state.login ? this.setState({loginIsValid: true}) : this.setState({loginIsValid: false});
+        this.state.email ? this.setState({emailIsValid: true}) : this.setState({emailIsValid: false});
+        this.state.password ? this.setState({passwordIsValid: true}) : this.setState({passwordIsValid: false});
+        this.state.birthday ? this.setState({birthdayIsValid: true}) : this.setState({birthdayIsValid: false});
+        this.state.password === this.state.repeatPassword ? this.setState({passwordsIsEqual: true}) : this.setState({passwordsIsEqual: false});
     }
 
     render() {
@@ -23,31 +57,39 @@ class SignUpModal extends React.Component {
                     <div className="modal-body">
                         <div className="content">
                             <form action="">
-                                <div className="form-group">
-                                    <label className="form-label" htmlFor="input-example-8">Login</label>
-                                    <input className="form-input" type="email" id="input-example-8" placeholder="Login"/>
+                                <div className={this.state.loginIsValid ? "form-group" : "form-group has-error"}>
+                                    <label className="form-label">Login</label>
+                                    <input className="form-input" type="text" ref='login' onBlur={this.validateForm}/>
+                                    {!this.state.loginIsValid && <span className="form-input-hint">This option is required.</span>}
                                 </div>
-                                <div className="form-group">
-                                    <label className="form-label" htmlFor="input-example-8">Email</label>
-                                    <input className="form-input" type="email" id="input-example-8" placeholder="Email" pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"/>
+                                <div className={this.state.emailIsValid ? "form-group" : "form-group has-error"}>
+                                    <label className="form-label">Email</label>
+                                    <input className="form-input" type="email" pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" ref='email'/>
+                                    {!this.state.emailIsValid && <span className="form-input-hint">This option is required.</span>}
+                                    {/*<span className="form-input-hint">E-mail is invalid.</span>*/}
                                 </div>
-                                <div className="form-group">
-                                    <label className="form-label" htmlFor="input-example-12">Password</label>
-                                    <input className="form-input" type="password" id="input-example-12" placeholder="Password"/>
+                                <div className={this.state.passwordIsValid ? "form-group" : "form-group has-error"}>
+                                    <label className="form-label">Password</label>
+                                    <input className="form-input" type="password" ref='password'/>
+                                    {!this.state.passwordIsValid && <span className="form-input-hint">This option is required.</span>}
+                                    {/*<span className="form-input-hint">Passwords must have at least 8 characters.</span>*/}
                                 </div>
-                                <div className="form-group">
-                                    <label className="form-label" htmlFor="input-example-12">Repeat password</label>
-                                    <input className="form-input" type="password" id="input-example-12" placeholder="Password"/>
+                                <div className={this.state.passwordsIsEqual ? "form-group" : "form-group has-error"}>
+                                    <label className="form-label">Repeat password</label>
+                                    <input className="form-input" type="password" ref='repeatPassword'/>
+                                    {!this.state.emailIsValid && <span className="form-input-hint">This option is required.</span>}
+                                    {!this.state.passwordsIsEqual && <span className="form-input-hint">Passwords not equal.</span>}
                                 </div>
-                                <div className="form-group">
-                                    <label className="form-label" htmlFor="input-example-14">Date of birth</label>
-                                    <input className="form-input" type="date" id="input-example-14"/>
+                                <div className={this.state.birthdayIsValid ? "form-group" : "form-group has-error"}>
+                                    <label className="form-label">Date of birth</label>
+                                    <input className="form-input" type="date" ref='birthday'/>
+                                    {!this.state.birthdayIsValid && <span className="form-input-hint">This option is required.</span>}
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button className="btn btn-primary">Submit</button>
+                        <button className="btn btn-primary" onClick={this.submitSignUpForm}>Submit</button>
                         <button className="btn btn-link" onClick={this.closeModal}>Close</button>
                     </div>
                 </div>
