@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'whatwg-fetch';
+
+//components
 import FormErrors from './FormErrors';
 
 class SignUpModal extends React.Component {
@@ -57,8 +60,7 @@ class SignUpModal extends React.Component {
 
         switch (fieldName) {
             case 'login':
-                loginValid = value.length >= 8;
-                fieldValidationErrors.login = loginValid ? '' : ' is too short';
+                loginValid = value.length;
                 break;
             case 'firstName':
                 firstNameValid = value.length;
@@ -123,6 +125,22 @@ class SignUpModal extends React.Component {
             birthday: this.refs.birthday.value,
         };
 
+        fetch('/user/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }).then( response => {
+            if ( response.status !== 200 ) {
+                console.error('Looks like there was a problem. Status Code: ' + response.status);
+                return
+            }
+
+            console.log(response);
+
+        }).catch(console.error);
+
         console.log(user);
         this.closeModal();
     }
@@ -148,7 +166,6 @@ class SignUpModal extends React.Component {
                                            ref='login'
                                            value={this.state.login}
                                            onChange={this.handleUserInput}/>
-                                    <FormErrors formErrors={this.state.formErrors} name='login'/>
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">First name</label>
