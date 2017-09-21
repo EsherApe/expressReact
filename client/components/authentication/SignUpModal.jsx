@@ -1,23 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FormErrors from './FormErrors';
 
 class SignUpModal extends React.Component {
     constructor(props) {
         super(props);
+
         this.closeModal = this.closeModal.bind(this);
-        this.submitSignUpForm = this.submitSignUpForm.bind(this);
+        this.handleUserInput = this.handleUserInput.bind(this);
+        this.validateField = this.validateField.bind(this);
         this.validateForm = this.validateForm.bind(this);
+        this.errorClass = this.errorClass.bind(this);
+        this.submitSignUpForm = this.submitSignUpForm.bind(this);
+
         this.state = {
-            loginIsValid: true,
-            passwordIsValid: true,
-            emailIsValid: true,
-            passwordsIsEqual: true,
-            birthdayIsValid: true,
-            login: null,
-            email: null,
-            password: null,
-            repeatPassword: null,
-            birthday: null
+            login: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            passwords: '',
+            birthday: '',
+            formErrors: { login: '', email: '', password: '', passwords: '', birthday: '' },
+            firstNameValid: false,
+            lastNameValid: false,
+            loginValid: false,
+            emailValid: false,
+            passwordValid: false,
+            passwordsValid: false,
+            birthdayValid: false,
+            formValid: false
         }
     }
 
@@ -25,33 +37,88 @@ class SignUpModal extends React.Component {
         this.props.closeModal();
     }
 
-    submitSignUpForm() {
-        this.setState({
-            login: this.refs.login.value,
-            password: this.refs.password.value,
-            repeatPassword: this.refs.repeatPassword.value,
-            birthday: this.refs.birthday.value
+    handleUserInput(e) {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value}, () => {
+            this.validateField(name, value)
         });
     }
 
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let firstNameValid = this.state.firstNameValid;
+        let lastNameValid = this.state.lastNameValid
+        let loginValid = this.state.loginValid;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        let passwordsValid = this.state.passwordsValid;
+        let birthdayValid = this.state.birthdayValid;
+        switch (fieldName) {
+            case 'login':
+                loginValid = value.length >= 8;
+                fieldValidationErrors.login = loginValid ? '' : ' is too short';
+                break;
+            case 'firstName':
+                firstNameValid = value.length;
+                break;
+            case 'lastName':
+                lastNameValid = value.length;
+                break;
+            case 'email':
+                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+                break;
+            case 'password':
+                passwordValid = value.length >= 8;
+                fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+                break;
+            case 'passwords':
+                passwordsValid = this.state.password === this.state.passwords;
+                fieldValidationErrors.passwords = passwordsValid ? '' : ' are not equal';
+                break;
+            case 'birthday':
+                birthdayValid = value.length;
+                break;
+            default:
+                break;
+        }
+
+        this.setState({
+            formErrors: fieldValidationErrors,
+            loginValid: loginValid,
+            firstNameValid: firstNameValid,
+            lastNameValid: lastNameValid,
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            passwordsValid: passwordsValid,
+            birthdayValid: birthdayValid,
+        }, this.validateForm);
+    }
+
     validateForm() {
-        this.state.password === this.state.repeatPassword ? this.setState({passwordsIsEqual: true}) : this.setState({passwordsIsEqual: false});
+        this.setState({
+            formValid: this.state.loginValid &&
+                       this.state.firstNameValid &&
+                       this.state.lastNameValid &&
+                       this.state.emailValid &&
+                       this.state.passwordValid &&
+                       this.state.passwordsValid &&
+                       this.state.birthdayValid
+        });
     }
 
-    validateLogin() {
-        this.state.login ? this.setState({loginIsValid: true}) : this.setState({loginIsValid: false});
+    errorClass(error) {
+        return(error.length === 0 ? '' : 'has-error');
     }
 
-    validateEmail() {
-        this.state.email ? this.setState({emailIsValid: true}) : this.setState({emailIsValid: false});
-    }
-
-    validatePassword() {
-        this.state.password ? this.setState({passwordIsValid: true}) : this.setState({passwordIsValid: false});
-    }
-
-    validateBirthday() {
-        this.state.birthday ? this.setState({birthdayIsValid: true}) : this.setState({birthdayIsValid: false});
+    submitSignUpForm() {
+        let user = {
+            login: this.refs.login,
+            email: this.refs.email,
+            password: this.refs.password,
+            birthday: this.refs.birthday,
+        }
     }
 
     render() {
@@ -60,58 +127,84 @@ class SignUpModal extends React.Component {
                 <div className="modal-overlay" onClick={this.closeModal}> </div>
                 <div className="modal-container column" role="document">
                     <div className="modal-header">
-                        <button type="button" className="btn btn-clear float-right" aria-label="Close" onClick={this.closeModal}> </button>
-                        <div className="modal-title h5">Modal title</div>
+                        <button type="button" className="btn btn-clear float-right" aria-label="Close"
+                                onClick={this.closeModal}> </button>
+                        <div className="modal-title h5">Sign Up!</div>
                     </div>
                     <div className="modal-body">
                         <div className="content">
-                            <form action="">
-                                <div className={this.state.loginIsValid ? "form-group" : "form-group has-error"}>
+                            <form>
+                                <div className={`form-group ${this.errorClass(this.state.formErrors.login)}`}>
                                     <label className="form-label">Login</label>
                                     <input className="form-input"
                                            type="text"
+                                           name="login"
                                            ref='login'
-                                           onBlur={this.validateLogin.bind(this)}/>
-                                    {!this.state.loginIsValid && <span className="form-input-hint">This option is required.</span>}
+                                           value={this.state.login}
+                                           onChange={this.handleUserInput}/>
+                                    <FormErrors formErrors={this.state.formErrors} name='login'/>
                                 </div>
-                                <div className={this.state.emailIsValid ? "form-group" : "form-group has-error"}>
+                                <div className="form-group">
+                                    <label className="form-label">First name</label>
+                                    <input className="form-input"
+                                           type="text"
+                                           name="firstName"
+                                           ref='firstName'
+                                           value={this.state.firstName}
+                                           onChange={this.handleUserInput}/>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Last name</label>
+                                    <input className="form-input"
+                                           type="text"
+                                           name="lastName"
+                                           ref='lastName'
+                                           value={this.state.lastName}
+                                           onChange={this.handleUserInput}/>
+                                </div>
+                                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                                     <label className="form-label">Email</label>
                                     <input className="form-input"
                                            type="email"
-                                           pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+                                           name="email"
                                            ref='email'
-                                           onBlur={this.validateEmail.bind(this)}/>
-                                    {!this.state.emailIsValid && <span className="form-input-hint">This option is required.</span>}
-                                    {/*<span className="form-input-hint">E-mail is invalid.</span>*/}
+                                           value={this.state.email}
+                                           onChange={this.handleUserInput}/>
+                                    <FormErrors formErrors={this.state.formErrors} name='email'/>
                                 </div>
-                                <div className={this.state.passwordIsValid ? "form-group" : "form-group has-error"}>
+                                <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
                                     <label className="form-label">Password</label>
                                     <input className="form-input"
                                            type="password"
+                                           name="password"
                                            ref='password'
-                                           onBlur={this.validatePassword.bind(this)}/>
-                                    {!this.state.passwordIsValid && <span className="form-input-hint">This option is required.</span>}
-                                    {/*<span className="form-input-hint">Passwords must have at least 8 characters.</span>*/}
+                                           value={this.state.password}
+                                           onChange={this.handleUserInput}/>
+                                    <FormErrors formErrors={this.state.formErrors} name='password'/>
                                 </div>
-                                <div className={this.state.passwordsIsEqual ? "form-group" : "form-group has-error"}>
+                                <div className={`form-group ${this.errorClass(this.state.formErrors.passwords)}`}>
                                     <label className="form-label">Repeat password</label>
-                                    <input className="form-input" type="password" ref='repeatPassword'/>
-                                    {!this.state.emailIsValid && <span className="form-input-hint">This option is required.</span>}
-                                    {!this.state.passwordsIsEqual && <span className="form-input-hint">Passwords not equal.</span>}
+                                    <input className="form-input"
+                                           type="password"
+                                           name="passwords"
+                                           value={this.state.passwords}
+                                           onChange={this.handleUserInput}/>
+                                    <FormErrors formErrors={this.state.formErrors} name='passwords'/>
                                 </div>
-                                <div className={this.state.birthdayIsValid ? "form-group" : "form-group has-error"}>
+                                <div className="form-group">
                                     <label className="form-label">Date of birth</label>
                                     <input className="form-input"
                                            type="date"
+                                           name='birthday'
                                            ref='birthday'
-                                           onBlur={this.validateBirthday.bind(this)}/>
-                                    {!this.state.birthdayIsValid && <span className="form-input-hint">This option is required.</span>}
+                                           value={this.state.birthday}
+                                           onChange={this.handleUserInput}/>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button className="btn btn-primary" onClick={this.submitSignUpForm}>Submit</button>
+                        <button className="btn btn-primary" disabled={!this.state.formValid} onClick={this.submitSignUpForm}>Submit</button>
                         <button className="btn btn-link" onClick={this.closeModal}>Close</button>
                     </div>
                 </div>
