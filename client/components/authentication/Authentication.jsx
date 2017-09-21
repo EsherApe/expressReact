@@ -51,7 +51,7 @@ class Authentication extends React.Component {
                         </div>
                         <p className="empty-title h5">Welcome my friend!</p>
                         <p className="empty-subtitle">you've come to the right place.</p>
-                        <div className="empty-action">
+                        <div className="empty-action m-b-20">
                             <div className="columns">
                                 <div className="column">
                                     <div className="card">

@@ -48,12 +48,13 @@ class SignUpModal extends React.Component {
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
         let firstNameValid = this.state.firstNameValid;
-        let lastNameValid = this.state.lastNameValid
+        let lastNameValid = this.state.lastNameValid;
         let loginValid = this.state.loginValid;
         let emailValid = this.state.emailValid;
         let passwordValid = this.state.passwordValid;
         let passwordsValid = this.state.passwordsValid;
         let birthdayValid = this.state.birthdayValid;
+
         switch (fieldName) {
             case 'login':
                 loginValid = value.length >= 8;
@@ -114,11 +115,16 @@ class SignUpModal extends React.Component {
 
     submitSignUpForm() {
         let user = {
-            login: this.refs.login,
-            email: this.refs.email,
-            password: this.refs.password,
-            birthday: this.refs.birthday,
-        }
+            firstName: this.refs.firstName.value,
+            lastName: this.refs.lastName.value,
+            login: this.refs.login.value,
+            email: this.refs.email.value,
+            password: this.refs.password.value,
+            birthday: this.refs.birthday.value,
+        };
+
+        console.log(user);
+        this.closeModal();
     }
 
     render() {
@@ -172,24 +178,30 @@ class SignUpModal extends React.Component {
                                            onChange={this.handleUserInput}/>
                                     <FormErrors formErrors={this.state.formErrors} name='email'/>
                                 </div>
-                                <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-                                    <label className="form-label">Password</label>
-                                    <input className="form-input"
-                                           type="password"
-                                           name="password"
-                                           ref='password'
-                                           value={this.state.password}
-                                           onChange={this.handleUserInput}/>
-                                    <FormErrors formErrors={this.state.formErrors} name='password'/>
-                                </div>
-                                <div className={`form-group ${this.errorClass(this.state.formErrors.passwords)}`}>
-                                    <label className="form-label">Repeat password</label>
-                                    <input className="form-input"
-                                           type="password"
-                                           name="passwords"
-                                           value={this.state.passwords}
-                                           onChange={this.handleUserInput}/>
-                                    <FormErrors formErrors={this.state.formErrors} name='passwords'/>
+                                <div className="columns">
+                                    <div className="column col-6">
+                                        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+                                            <label className="form-label">Password</label>
+                                            <input className="form-input"
+                                                   type="password"
+                                                   name="password"
+                                                   ref='password'
+                                                   value={this.state.password}
+                                                   onChange={this.handleUserInput}/>
+                                            <FormErrors formErrors={this.state.formErrors} name='password'/>
+                                        </div>
+                                    </div>
+                                    <div className="column col-6">
+                                        <div className={`form-group ${this.errorClass(this.state.formErrors.passwords)}`}>
+                                            <label className="form-label">Repeat password</label>
+                                            <input className="form-input"
+                                                   type="password"
+                                                   name="passwords"
+                                                   value={this.state.passwords}
+                                                   onChange={this.handleUserInput}/>
+                                            <FormErrors formErrors={this.state.formErrors} name='passwords'/>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">Date of birth</label>
