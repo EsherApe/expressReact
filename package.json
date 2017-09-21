@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "body-parser": "^1.18.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.12",
     "morgan": "^1.8.2",
+    "nconf": "^0.8.4",
     "pug": "^2.0.0-rc.3",
     "winston": "^2.3.1"
   }
