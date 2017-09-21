@@ -137,11 +137,10 @@ class SignUpModal extends React.Component {
                 return
             }
 
-            console.log(response);
+            console.log(response.data);
 
         }).catch(console.error);
 
-        console.log(user);
         this.closeModal();
     }
 
