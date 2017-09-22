@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
+import { connect } from 'react-redux';
 
 //components
 import FormErrors from './FormErrors';
@@ -32,7 +33,8 @@ class SignUpModal extends React.Component {
             passwordValid: false,
             passwordsValid: false,
             birthdayValid: false,
-            formValid: false
+            formValid: false,
+            responseMessage: null
         }
     }
 
@@ -134,106 +136,115 @@ class SignUpModal extends React.Component {
         }).then( response => {
             if ( response.status !== 200 ) {
                 console.error('Looks like there was a problem. Status Code: ' + response.status);
-                return
+                return;
+            }
+            return response.json();
+        }).then( message => {
+            if(message.error) {
+                this.setState({responseMessage: message.text});
+            } else {
+                this.props.onSignUp();
+                this.closeModal();
             }
 
-            console.log(response.data);
-
+            console.log(message);
         }).catch(console.error);
-
-        this.closeModal();
     }
 
     render() {
         return (
-            <div className="modal modal-sm active">
-                <div className="modal-overlay" onClick={this.closeModal}> </div>
-                <div className="modal-container column" role="document">
-                    <div className="modal-header">
-                        <button type="button" className="btn btn-clear float-right" aria-label="Close"
-                                onClick={this.closeModal}> </button>
-                        <div className="modal-title h5">Sign Up!</div>
+            <div>
+                <div className="modal modal-sm active">
+                    <div className="modal-overlay" onClick={this.closeModal}>
+                        {this.state.responseMessage && <div className="toast">{this.state.responseMessage}</div>}
                     </div>
-                    <div className="modal-body">
-                        <div className="content">
-                            <form>
-                                <div className={`form-group ${this.errorClass(this.state.formErrors.login)}`}>
-                                    <label className="form-label">Login</label>
-                                    <input className="form-input"
-                                           type="text"
-                                           name="login"
-                                           ref='login'
-                                           value={this.state.login}
-                                           onChange={this.handleUserInput}/>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label">First name</label>
-                                    <input className="form-input"
-                                           type="text"
-                                           name="firstName"
-                                           ref='firstName'
-                                           value={this.state.firstName}
-                                           onChange={this.handleUserInput}/>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label">Last name</label>
-                                    <input className="form-input"
-                                           type="text"
-                                           name="lastName"
-                                           ref='lastName'
-                                           value={this.state.lastName}
-                                           onChange={this.handleUserInput}/>
-                                </div>
-                                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-                                    <label className="form-label">Email</label>
-                                    <input className="form-input"
-                                           type="email"
-                                           name="email"
-                                           ref='email'
-                                           value={this.state.email}
-                                           onChange={this.handleUserInput}/>
-                                    <FormErrors formErrors={this.state.formErrors} name='email'/>
-                                </div>
-                                <div className="columns">
-                                    <div className="column col-6">
-                                        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-                                            <label className="form-label">Password</label>
-                                            <input className="form-input"
-                                                   type="password"
-                                                   name="password"
-                                                   ref='password'
-                                                   value={this.state.password}
-                                                   onChange={this.handleUserInput}/>
-                                            <FormErrors formErrors={this.state.formErrors} name='password'/>
-                                        </div>
-                                    </div>
-                                    <div className="column col-6">
-                                        <div className={`form-group ${this.errorClass(this.state.formErrors.passwords)}`}>
-                                            <label className="form-label">Repeat password</label>
-                                            <input className="form-input"
-                                                   type="password"
-                                                   name="passwords"
-                                                   value={this.state.passwords}
-                                                   onChange={this.handleUserInput}/>
-                                            <FormErrors formErrors={this.state.formErrors} name='passwords'/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label">Date of birth</label>
-                                    <input className="form-input"
-                                           type="date"
-                                           name='birthday'
-                                           ref='birthday'
-                                           value={this.state.birthday}
-                                           onChange={this.handleUserInput}/>
-                                </div>
-                            </form>
+                    <div className="modal-container column" role="document">
+                        <div className="modal-header">
+                            <button type="button" className="btn btn-clear float-right" aria-label="Close"
+                                    onClick={this.closeModal}> </button>
+                            <div className="modal-title h5">Sign Up!</div>
                         </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button className="btn btn-primary" disabled={!this.state.formValid} onClick={this.submitSignUpForm}>Submit</button>
-                        <button className="btn btn-link" onClick={this.closeModal}>Close</button>
+                        <div className="modal-body">
+                            <div className="content">
+                                <form>
+                                    <div className={`form-group ${this.errorClass(this.state.formErrors.login)}`}>
+                                        <label className="form-label">Login</label>
+                                        <input className="form-input"
+                                               type="text"
+                                               name="login"
+                                               ref='login'
+                                               value={this.state.login}
+                                               onChange={this.handleUserInput}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">First name</label>
+                                        <input className="form-input"
+                                               type="text"
+                                               name="firstName"
+                                               ref='firstName'
+                                               value={this.state.firstName}
+                                               onChange={this.handleUserInput}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">Last name</label>
+                                        <input className="form-input"
+                                               type="text"
+                                               name="lastName"
+                                               ref='lastName'
+                                               value={this.state.lastName}
+                                               onChange={this.handleUserInput}/>
+                                    </div>
+                                    <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                                        <label className="form-label">Email</label>
+                                        <input className="form-input"
+                                               type="email"
+                                               name="email"
+                                               ref='email'
+                                               value={this.state.email}
+                                               onChange={this.handleUserInput}/>
+                                        <FormErrors formErrors={this.state.formErrors} name='email'/>
+                                    </div>
+                                    <div className="columns">
+                                        <div className="column col-6">
+                                            <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+                                                <label className="form-label">Password</label>
+                                                <input className="form-input"
+                                                       type="password"
+                                                       name="password"
+                                                       ref='password'
+                                                       value={this.state.password}
+                                                       onChange={this.handleUserInput}/>
+                                                <FormErrors formErrors={this.state.formErrors} name='password'/>
+                                            </div>
+                                        </div>
+                                        <div className="column col-6">
+                                            <div className={`form-group ${this.errorClass(this.state.formErrors.passwords)}`}>
+                                                <label className="form-label">Repeat password</label>
+                                                <input className="form-input"
+                                                       type="password"
+                                                       name="passwords"
+                                                       value={this.state.passwords}
+                                                       onChange={this.handleUserInput}/>
+                                                <FormErrors formErrors={this.state.formErrors} name='passwords'/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">Date of birth</label>
+                                        <input className="form-input"
+                                               type="date"
+                                               name='birthday'
+                                               ref='birthday'
+                                               value={this.state.birthday}
+                                               onChange={this.handleUserInput}/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button className="btn btn-primary" disabled={!this.state.formValid} onClick={this.submitSignUpForm}>Submit</button>
+                            <button className="btn btn-link" onClick={this.closeModal}>Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -245,4 +256,17 @@ SignUpModal.propTypes = {
     closeModal: PropTypes.func.isRequired
 };
 
-export default SignUpModal
+const mapStateToProps = state => ({
+    isLogin: state.login.get('isLogin')
+});
+
+const mapDispatchToProps = dispatch => ({
+    onSignUp: () => {
+        dispatch({type: 'LOG_IN', isLogin: true})
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignUpModal);

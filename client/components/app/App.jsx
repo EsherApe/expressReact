@@ -35,7 +35,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isLogin: state.user.get('isLogin')
+    isLogin: state.login.get('isLogin')
 });
 
 const mapDispatchToProps = dispatch => ({

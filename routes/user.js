@@ -14,17 +14,16 @@ router.post('/save', (req, res) => {
         birthday: req.body.birthday
     });
 
-    user.save((err, user, affected) => {
+    user.save((err, user) => {
         if (err) {
-            console.log(err);
+            if(err.code === '11000') {
+                console.log(err);
+                res.send({text: 'User is exist', error: true})
+            }
         }
 
-        User.findOne({login: 'esherape'}, (err, user) => {
-            console.log(user);
-        })
-    });
-
-    res.send('User was successfully saved!');
+        res.send({text: 'User was successfully saved!', error: false});
+    })
 });
 
 module.exports = router;
