@@ -10,7 +10,7 @@ function user(state = initialState, action) {
             return state.merge(action.user);
             break;
         case 'LOG_OUT':
-            return state.update(action.user);
+            return state.merge(action.user);
             break;
     }
 
