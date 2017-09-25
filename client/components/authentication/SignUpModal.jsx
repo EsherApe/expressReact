@@ -142,8 +142,11 @@ class SignUpModal extends React.Component {
         }).then( message => {
             if(message.error) {
                 this.setState({responseMessage: message.text});
+                setTimeout(() => {
+                    this.setState({responseMessage: false});
+                }, 3000);
             } else {
-                this.props.onSignUp();
+                this.props.onSignUp(message.user);
                 this.closeModal();
             }
 
@@ -156,7 +159,7 @@ class SignUpModal extends React.Component {
             <div>
                 <div className="modal modal-sm active">
                     <div className="modal-overlay" onClick={this.closeModal}>
-                        {this.state.responseMessage && <div className="toast">{this.state.responseMessage}</div>}
+                        {this.state.responseMessage && <div className='col-mx-auto col-3'><div className="toast toast-error">{this.state.responseMessage}</div></div>}
                     </div>
                     <div className="modal-container column" role="document">
                         <div className="modal-header">
@@ -257,12 +260,12 @@ SignUpModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isLogin: state.login.get('isLogin')
+    isLogin: state.user.get('isLogin')
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSignUp: () => {
-        dispatch({type: 'LOG_IN', isLogin: true})
+    onSignUp: user => {
+        dispatch({type: 'LOG_IN', user: user})
     }
 });
 

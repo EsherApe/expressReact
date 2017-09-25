@@ -26,8 +26,8 @@ class Profile extends React.Component {
                     <figure className="avatar avatar-lg">
                         <img src="/static/img/avatar-2.png" alt="Avatar"/>
                     </figure>
-                    <div className="panel-title h5 mt-10">Bruce Banner</div>
-                    <div className="panel-subtitle">THE HULK</div>
+                    <div className="panel-title h5 mt-10">{this.props.user.get('firstName')} {this.props.user.get('lastName')}</div>
+                    <div className="panel-subtitle">{this.props.user.get('login').toUpperCase()}</div>
                 </div>
                 <nav className="panel-nav">
                     <ul className="tab tab-block">
@@ -52,8 +52,8 @@ class Profile extends React.Component {
                     </ul>
                 </nav>
                 <div className="panel-body">
-                    {this.state.activeTab === 'contacts' && <Contacts/>}
-                    {this.state.activeTab === 'personalInfo' && <PersonalInfo/>}
+                    {this.state.activeTab === 'contacts' && <Contacts contacts={this.props.user}/>}
+                    {this.state.activeTab === 'personalInfo' && <PersonalInfo info={this.props.user}/>}
                     {this.state.activeTab === 'friends' && <Friends/>}
                 </div>
                 <div className="panel-footer">

@@ -101,7 +101,9 @@ class Menu extends React.Component {
 const mapStateToProps = state => ({
     content: state.content.get('contentName'),
     messages: state.messages.get('messagesList'),
-    notifications: state.notifications.get('notificationsList')
+    notifications: state.notifications.get('notificationsList'),
+    userId: state.users.get('showUserId'),
+    user: state.user
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -109,7 +111,10 @@ const mapDispatchToProps = dispatch => ({
         dispatch({type: 'SWITCH_CONTENT', contentName: contentName})
     },
     logout: () => {
-        dispatch({type: 'LOG_OUT', isLogin: false})
+        let userData = {
+            isLogin: false
+        };
+        dispatch({type: 'LOG_OUT', user: userData})
     }
 });
 
