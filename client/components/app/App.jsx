@@ -40,7 +40,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     login: () => {
-        dispatch({type: 'LOG_IN', isLogin: true});
+        let user = {
+           isLogin: false
+        };
+        dispatch({type: 'LOG_IN', user: user});
     }
 });
 
