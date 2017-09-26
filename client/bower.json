@@ -1,0 +1,20 @@
+{
+  "name": "client",
+  "description": "",
+  "main": "",
+  "authors": [
+    "funkybo <esher5580@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/EsherApe/expressReact",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "spectre.css": "^0.4.2"
+  }
+}
