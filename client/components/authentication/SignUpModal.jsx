@@ -159,7 +159,7 @@ class SignUpModal extends React.Component {
             <div>
                 <div className="modal modal-sm active">
                     <div className="modal-overlay" onClick={this.closeModal}>
-                        {this.state.responseMessage && <div className='col-mx-auto col-3'><div className="toast toast-error">{this.state.responseMessage}</div></div>}
+                        {this.state.responseMessage && <div className='col-mx-auto col-4'><div className="toast toast-error">{this.state.responseMessage}</div></div>}
                     </div>
                     <div className="modal-container column" role="document">
                         <div className="modal-header">

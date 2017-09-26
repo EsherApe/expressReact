@@ -48,9 +48,11 @@ router.post('/login', (req, res, next) => {
             if(user.checkPasswords(password)) {
                 return user;
             } else {
+                res.send({error: true, message: 'Wrong E-mail or password'});
                 next(createError(403, 'Wrong E-mail or password'));
             }
         } else {
+            res.send({error: true, message: 'Wrong E-mail or password'});
             next(createError(403, 'Wrong E-mail or password'));
         }
     }).then(user => {

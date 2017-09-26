@@ -8,6 +8,9 @@ class LogInModal extends React.Component {
         super(props);
         this.closeModal = this.closeModal.bind(this);
         this.login = this.login.bind(this);
+        this.state = {
+            responseMessage: ''
+        }
     }
 
     closeModal() {
@@ -30,41 +33,52 @@ class LogInModal extends React.Component {
                 body: JSON.stringify(user)
             }).then(resp => {
                 return resp.json();
-            }).then(user => {
-                this.props.onLogIn(user);
+            }).then(resp => {
+                if (resp.error) {
+                    this.setState({responseMessage: resp.message});
+                    setTimeout(() => {
+                        this.setState({responseMessage: ''});
+                    }, 5000)
+                } else {
+                    this.props.onLogIn(resp);
+                }
             }).catch(err => console.error(err));
         }
     }
 
     render() {
         return (
-            <div className="modal modal-sm active">
-                <div className="modal-overlay" onClick={this.closeModal}> </div>
-                <div className="modal-container column" role="document">
-                    <div className="modal-header">
-                        <button type="button" className="btn btn-clear float-right" aria-label="Close"
-                                onClick={this.closeModal}> </button>
-                        <div className="modal-title h5">Modal title</div>
+            <div>
+                <div className="modal modal-sm active">
+                    <div className="modal-overlay" onClick={this.closeModal}>
+                        {this.state.responseMessage && <div className='col-mx-auto col-4'><div className="toast toast-error">{this.state.responseMessage}</div></div>}
                     </div>
-                    <div className="modal-body">
-                        <div className="content">
-                            <form>
-                                <div className="form-group">
-                                    <label className="form-label" htmlFor="login-email-input">E-mail</label>
-                                    <input className="form-input" type="text" id="login-email-input" ref='email'
-                                           placeholder="E-mail"/>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label" htmlFor="input-example-7">Password</label>
-                                    <input className="form-input" type="password" id="input-example-7" ref='password'
-                                           placeholder="Password"/>
-                                </div>
-                            </form>
+                    <div className="modal-container column" role="document">
+                        <div className="modal-header">
+                            <button type="button" className="btn btn-clear float-right" aria-label="Close"
+                                    onClick={this.closeModal}> </button>
+                            <div className="modal-title h5">Login!</div>
                         </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button className="btn btn-primary" onClick={this.login}>Submit</button>
-                        <button className="btn btn-link" onClick={this.closeModal}>Close</button>
+                        <div className="modal-body">
+                            <div className="content">
+                                <form>
+                                    <div className="form-group">
+                                        <label className="form-label" htmlFor="login-email-input">E-mail</label>
+                                        <input className="form-input" type="text" id="login-email-input" ref='email'
+                                               placeholder="E-mail"/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label" htmlFor="input-example-7">Password</label>
+                                        <input className="form-input" type="password" id="input-example-7" ref='password'
+                                               placeholder="Password"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button className="btn btn-primary" onClick={this.login}>Submit</button>
+                            <button className="btn btn-link" onClick={this.closeModal}>Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
