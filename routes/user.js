@@ -11,10 +11,10 @@ router.post('/save', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        birthday: req.body.birthday
+        birthday: req.body.birthday,
+        password: req.body.password
     });
 
-    user.set('password', req.body.password);
     user.save((err, user) => {
         if (err) {
             if(err.code == 11000) {
@@ -22,7 +22,6 @@ router.post('/save', (req, res) => {
                 res.send({text: 'This user is already exist!', error: true});
             }
         } else {
-
             let newUser = {
                 id: user._id,
                 login: user.login,
