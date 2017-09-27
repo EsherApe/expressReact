@@ -25,7 +25,7 @@ class LogInModal extends React.Component {
 
         if (user.email && user.password) {
 
-            fetch('/user/login', {
+            fetch('/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

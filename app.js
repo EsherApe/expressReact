@@ -10,6 +10,7 @@ const app = express();
 
 //import routes
 const index = require('./routes/index');
+const login = require('./routes/login');
 const user = require('./routes/user');
 
 app.use(morgan('dev'));
@@ -35,6 +36,7 @@ app.set('view engine', 'pug');
 
 //routes
 app.use('*', index);
+app.use('/', login);
 app.use('/user', user);
 
 // error handler
