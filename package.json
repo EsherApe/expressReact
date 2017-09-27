@@ -5,7 +5,7 @@
   "author": "Andrew Bazilskiy",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "DEBUG=express-session nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.1",

@@ -24,7 +24,7 @@ app.use(session({
     secret: config.get('session:secret'),
     key: config.get('session:key'),
     cookie: config.get('session:cookie'),
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: false,
     store: mongoose_store
 }));

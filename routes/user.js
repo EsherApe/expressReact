@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require('../models/user').User;
 
 router.post('/save', (req, res) => {
+    console.log(req.session);
     if (!req.body) return req.sendStatus(400);
 
     const user = new User({
