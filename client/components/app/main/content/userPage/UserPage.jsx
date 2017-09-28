@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 //styles
 import './userPage.scss';
 //components
-import Loader from '../../../loader/Loader';
+import Loader from '../../../../loader/Loader';
 import UserProfile from './UserProfile';
 import UserChat from './UserChat';
 

@@ -20,13 +20,15 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.getUser = this.getUser.bind(this);
+        this.state = {
+            userIsLoaded: false
+        }
     }
 
     getUser() {
         let user = {
             userId: this.props.userId
         };
-
         fetch('/user/get_user', {
             method: 'POST',
             headers: {
@@ -42,8 +44,9 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.isLogin) {
+        if(this.props.isLogin && !this.state.userIsLoaded) {
             this.getUser();
+            this.setState({userIsLoaded: true});
         }
     }
 
@@ -78,7 +81,7 @@ const mapDispatchToProps = dispatch => ({
         };
         dispatch(login(status));
     },
-    onGetUser: (resp) => {
+    onGetUser: resp => {
         dispatch(getUser(resp));
     }
 });
@@ -87,5 +90,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(App);
-
-//TODO: fix GET_USER query it fires every time
