@@ -36,7 +36,7 @@ router.post('/save', (req, res) => {
     })
 });
 
-router.post('/get', (req, res) => {
+router.post('/get_user', (req, res, next) => {
     User.findById(req.body.userId, (err, user) => {
         if(err) return next(err);
         return user;
@@ -48,7 +48,8 @@ router.post('/get', (req, res) => {
                 lastName: user.lastName,
                 firstName: user.firstName,
                 email: user.email,
-                birthday: user.birthday
+                birthday: user.birthday,
+                isLogin: true
             };
             res.send(respUser);
         } else {

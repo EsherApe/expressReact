@@ -23,8 +23,7 @@ class App extends React.Component {
             userId: this.props.userId
         };
 
-        console.log(user);
-        fetch('/user/get', {
+        fetch('/user/get_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,7 +38,6 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.props.isLogin);
         if(this.props.isLogin) {
             this.getUser();
         }
@@ -50,7 +48,7 @@ class App extends React.Component {
             <div className='container grid-sm wrapper'>
                 <div className='main-wrapper'>
                     <Header/>
-                    {this.props.isLogin ? <Main/> : <Authentication loginFn={this.props.login}/>}
+                    {this.props.user.get('isLogin') ? <Main user={this.props.user}/> : <Authentication loginFn={this.props.login}/>}
                 </div>
                 <Footer/>
             </div>
@@ -60,8 +58,7 @@ class App extends React.Component {
 
 App.propTypes = {
     login: PropTypes.func.isRequired,
-    isLogin: PropTypes.bool.isRequired,
-    userId: PropTypes.string.isRequired
+    isLogin: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

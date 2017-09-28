@@ -8,7 +8,17 @@ router.get('/', (req, res, next) => {
             if(err) return next(err);
             return user;
         }).then(user => {
-            res.send(user);
+            let respUser = {
+                id: user._id,
+                login: user.login,
+                lastName: user.lastName,
+                firstName: user.firstName,
+                email: user.email,
+                birthday: user.birthday,
+                isLogin: true
+            };
+            console.log(respUser);
+            res.send(respUser);
         });
     }
     res.render('index');
