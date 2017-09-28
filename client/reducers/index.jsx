@@ -11,5 +11,6 @@ export default combineReducers({
     messages,
     notifications,
     users,
-    user
+    user,
+    login
 })

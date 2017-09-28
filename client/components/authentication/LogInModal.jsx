@@ -8,6 +8,7 @@ class LogInModal extends React.Component {
         super(props);
         this.closeModal = this.closeModal.bind(this);
         this.login = this.login.bind(this);
+        this.getUser = this.getUser.bind(this);
         this.state = {
             responseMessage: ''
         }
@@ -45,6 +46,11 @@ class LogInModal extends React.Component {
                 }
             }).catch(err => console.error(err));
         }
+    }
+
+    getUser() {
+        console.log('get user');
+        this.props.onGetUser();
     }
 
     render() {
@@ -92,12 +98,12 @@ LogInModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isLogin: state.user.get('isLogin')
+    isLogin: state.login.get('isLogin')
 });
 
 const mapDispatchToProps = dispatch => ({
-    onLogIn: user => {
-        dispatch({type: 'LOG_IN', user: user})
+    onLogIn: resp => {
+        dispatch({type: 'LOG_IN', login: resp})
     }
 });
 

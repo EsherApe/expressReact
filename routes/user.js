@@ -29,10 +29,30 @@ router.post('/save', (req, res) => {
                 lastName: user.lastName,
                 firstName: user.firstName,
                 email: user.email,
-                birthday: user.birthday,
-                isLogin: true
+                birthday: user.birthday
             };
             res.send({text: 'User was successfully saved!', error: false, user: newUser});
+        }
+    })
+});
+
+router.post('/get', (req, res) => {
+    User.findById(req.body.userId, (err, user) => {
+        if(err) return next(err);
+        return user;
+    }).then(user => {
+        if (user) {
+            let respUser = {
+                id: user._id,
+                login: user.login,
+                lastName: user.lastName,
+                firstName: user.firstName,
+                email: user.email,
+                birthday: user.birthday
+            };
+            res.send(respUser);
+        } else {
+            next(createError(403, 'User not found'));
         }
     })
 });

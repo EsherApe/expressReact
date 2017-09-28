@@ -26,17 +26,8 @@ router.post('/login', (req, res, next) => {
             sendError();
         }
     }).then(user => {
-        let loggedUser = {
-            id: user._id,
-            login: user.login,
-            lastName: user.lastName,
-            firstName: user.firstName,
-            email: user.email,
-            birthday: user.birthday,
-            isLogin: true
-        };
-        req.session.user = loggedUser.id;
-        res.send(loggedUser);
+        req.session.user = user._id;
+        res.send({isLogin: true, userId: user._id});
     }).catch(err => {
         console.log(err);
     })

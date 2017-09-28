@@ -1,15 +1,10 @@
 import { Map } from 'immutable';
 
-const initialState = Map({
-    isLogin: false
-});
+const initialState = Map({});
 
 function user(state = initialState, action) {
     switch(action.type) {
-        case 'LOG_IN':
-            return state.merge(action.user);
-            break;
-        case 'LOG_OUT':
+        case 'GET_USER':
             return state.merge(action.user);
             break;
     }

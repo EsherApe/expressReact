@@ -14,6 +14,7 @@ class Content extends React.Component {
         super(props);
     }
     render() {
+        console.log(this.props.user);
         return (
             <section className="column col-8 col-xs-12">
                 {this.props.content === 'profile' && <Profile user={this.props.user}/>}
@@ -36,8 +37,7 @@ const mapStateToProps = state => ({
     content: state.content.get('contentName'),
     messages: state.messages.get('messagesList'),
     notifications: state.notifications.get('notificationsList'),
-    userId: state.users.get('showUserId'),
-    user: state.user
+    userId: state.users.get('showUserId')
 });
 
 const mapDispatchToProps = dispatch => ({});
