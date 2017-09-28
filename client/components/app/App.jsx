@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 
+//actions
+import {login} from '../../actions/loginActions';
+import {getUser} from '../../actions/userActions';
+
 //styles
 import './app.scss';
 
@@ -72,10 +76,10 @@ const mapDispatchToProps = dispatch => ({
         let status = {
            isLogin: false
         };
-        dispatch({type: 'LOG_IN', login: status});
+        dispatch(login(status));
     },
     onGetUser: (resp) => {
-        dispatch({type: 'GET_USER', user: resp});
+        dispatch(getUser(resp));
     }
 });
 
@@ -83,3 +87,5 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(App);
+
+//TODO: fix GET_USER query it fires every time

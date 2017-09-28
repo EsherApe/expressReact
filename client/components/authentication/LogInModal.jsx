@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 import {connect} from 'react-redux';
+import {login} from '../../actions/loginActions';
 
 class LogInModal extends React.Component {
     constructor(props) {
@@ -103,7 +104,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onLogIn: resp => {
-        dispatch({type: 'LOG_IN', login: resp})
+        dispatch(login(resp));
     }
 });
 

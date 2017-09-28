@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 import { connect } from 'react-redux';
 
+//actions
+import {login} from '../../actions/loginActions';
+
 //components
 import FormErrors from './FormErrors';
 
@@ -265,7 +268,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onSignUp: user => {
-        dispatch({type: 'LOG_IN', user: user})
+        dispatch(login(user))
     }
 });
 

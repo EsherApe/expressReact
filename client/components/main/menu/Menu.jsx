@@ -1,6 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+//actions
+import {logout} from '../../../actions/loginActions';
+import {switchContent} from '../../../actions/contentActions';
+
 class Menu extends React.Component {
     constructor(props) {
         super(props);
@@ -108,13 +112,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onSwitchPage: contentName => {
-        dispatch({type: 'SWITCH_CONTENT', contentName: contentName})
+        dispatch(switchContent(contentName))
     },
     logout: () => {
         let userData = {
             isLogin: false
         };
-        dispatch({type: 'LOG_OUT', user: userData})
+        dispatch(logout(userData))
     }
 });
 
