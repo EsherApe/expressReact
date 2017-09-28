@@ -11,10 +11,10 @@ import {getUser} from '../../actions/userActions';
 import './app.scss';
 
 //components
-import Header from "../header/Header";
-import Authentication from "../authentication/Authentication";
-import Main from "../main/Main";
-import Footer from '../footer/Footer';
+import Header from "./header/Header";
+import Authentication from "./authentication/Authentication";
+import Main from "./main/Main";
+import Footer from './footer/Footer';
 
 class App extends React.Component {
     constructor(props) {

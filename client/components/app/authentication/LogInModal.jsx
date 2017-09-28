@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 import {connect} from 'react-redux';
-import {login} from '../../actions/loginActions';
+import {login} from '../../../actions/loginActions';
 
 class LogInModal extends React.Component {
     constructor(props) {
