@@ -23,10 +23,10 @@ const mongoose_store = new MongoStore({mongooseConnection: mongoose.connection})
 app.use(session({
     secret: config.get('session:secret'),
     key: config.get('session:key'),
-    cookie: config.get('session:cookie'),
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false,
-    store: mongoose_store
+    store: mongoose_store,
+    cookie: config.get('session:cookie')
 }));
 
 app.use('/static', express.static(__dirname + '/client/static'));

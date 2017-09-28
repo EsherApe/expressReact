@@ -30,7 +30,8 @@ class LogInModal extends React.Component {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(user)
+                body: JSON.stringify(user),
+                credentials: 'same-origin'
             }).then(resp => {
                 return resp.json();
             }).then(resp => {
