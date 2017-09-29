@@ -18,6 +18,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use('/static', express.static(__dirname + '/client/static'));
+
+//config templates
+app.set('view engine', 'pug');
+
 const MongoStore = require('connect-mongo')(session);
 const mongoose_store = new MongoStore({mongooseConnection: mongoose.connection});
 app.use(session({
@@ -29,10 +34,8 @@ app.use(session({
     cookie: config.get('session:cookie')
 }));
 
-app.use('/static', express.static(__dirname + '/client/static'));
-
-//config templates
-app.set('view engine', 'pug');
+//middleware
+app.use(require('./middleware/loadUser'));
 
 //routes
 app.use('*', index);

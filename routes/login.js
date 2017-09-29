@@ -17,6 +17,8 @@ router.post('/login', (req, res, next) => {
         }
 
         req.session.user = user._id;
+        req.session.email = email;
+        req.session.password = password;
         res.send({isLogin: true, userId: user._id});
     });
 });
