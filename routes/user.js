@@ -3,6 +3,15 @@ const createError = require('http-errors');
 const router = express.Router();
 const User = require('../models/user').User;
 
+router.get('/check_session', (req, res, next) => {
+    console.log('sdfsdfsdfsfsdf');
+    if(req.session.user) {
+        console.log('hello from check_session');
+        res.send({isLogin: true, userId: req.session.user})
+    }
+    next();
+});
+
 router.post('/save', (req, res) => {
     console.log(req.session);
     if (!req.body) return req.sendStatus(400);

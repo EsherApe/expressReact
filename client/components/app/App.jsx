@@ -20,9 +20,20 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.getUser = this.getUser.bind(this);
+        this.checkSession = this.checkSession.bind(this);
         this.state = {
             userIsLoaded: false
         }
+    }
+
+    checkSession() {
+        fetch('/user/check_session').then(resp => {
+            console.log('login status', resp.json());
+            return resp.json();
+        }).then(resp => {
+            console.log('login status', resp);
+            // this.props.onCheckSession(resp);
+        })
     }
 
     getUser() {
@@ -41,6 +52,10 @@ class App extends React.Component {
         }).then(resp => {
             this.props.onGetUser(resp);
         })
+    }
+
+    componentDidMount() {
+        this.checkSession();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -83,6 +98,9 @@ const mapDispatchToProps = dispatch => ({
     },
     onGetUser: resp => {
         dispatch(getUser(resp));
+    },
+    onCheckSession: resp => {
+        dispatch(login(resp));
     }
 });
 

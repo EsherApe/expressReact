@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
         return user;
     }).then(user => {
         if (user) {
-            let respUser = {
+            req.user = {
                 id: user._id,
                 login: user.login,
                 lastName: user.lastName,
@@ -17,11 +17,9 @@ module.exports = function (req, res, next) {
                 birthday: user.birthday,
                 isLogin: true
             };
-            // res.send(respUser);
+            next();
         } else {
             next(createError(403, 'User not found'));
         }
     });
-
-    next();
 };
