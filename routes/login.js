@@ -1,5 +1,6 @@
 const express = require('express');
-const createError = require('http-errors');
+const HttpError = require('../error').HttpError;
+const AuthError = require('../models/user').AuthError;
 const router = express.Router();
 const User = require('../models/user').User;
 
@@ -7,30 +8,17 @@ router.post('/login', (req, res, next) => {
     let password = req.body.password,
         email = req.body.email;
 
-    function sendError() {
-        res.send({error: 403, message: 'Wrong E-mail or password'});
-        next(createError(403, 'Wrong E-mail or password'));
-    }
-
-    User.findOne({email: email}, (err, user) => {
-        if (err) return next(err);
-        return user;
-    }).then((user) => {
-        if (user) {
-            if (user.checkPasswords(password)) {
-                return user;
-            } else {
-                sendError();
+    User.authorize(email, password, function(err, user) {
+        if(err) {
+            if(err instanceof AuthError) {
+                return res.send({error: 403, message: 'Wrong E-mail or password'});
             }
-        } else {
-            sendError();
+            return next(err);
         }
-    }).then(user => {
+
         req.session.user = user._id;
         res.send({isLogin: true, userId: user._id});
-    }).catch(err => {
-        console.log(err);
-    })
+    });
 });
 
 router.post('/logout', (req, res, next) => {

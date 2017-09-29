@@ -1,6 +1,7 @@
 const crypto = require('crypto');
+const util =require('util');
 const mongoose = require('../utils/mongoose'),
-    Schema = mongoose.Schema;
+      Schema = mongoose.Schema;
 
 const schema = new Schema({
     login: {
@@ -57,4 +58,36 @@ schema.methods.checkPasswords = function (password) {
     return this.encryptPassword(password) === this.hashedPassword;
 };
 
+schema.statics.authorize = function (email, password, callback) {
+    let User = this;
+
+    User.findOne({email: email}, (err, user) => {
+        if (err) callback(err);
+        return user;
+    }).then((user) => {
+        if (user) {
+            if (user.checkPasswords(password)) {
+                callback(null, user);
+            } else {
+                callback(new AuthError('Wrong password!'));
+            }
+        } else {
+            callback(new AuthError('This user does not exist!'));
+        }
+    }).catch(err => {
+        console.error(err);
+    })
+};
+
+//authorization error
+function AuthError(message) {
+    Error.apply(this, arguments);
+    Error.captureStackTrace(this, AuthError);
+
+    this.message = message;
+}
+util.inherits(AuthError, Error);
+AuthError.prototype.name = "AuthError";
+
+exports.AuthError = AuthError;
 exports.User = mongoose.model('User', schema);

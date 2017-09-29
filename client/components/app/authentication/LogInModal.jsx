@@ -50,7 +50,6 @@ class LogInModal extends React.Component {
     }
 
     getUser() {
-        console.log('get user');
         this.props.onGetUser();
     }
 
