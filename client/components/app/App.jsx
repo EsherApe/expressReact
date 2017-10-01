@@ -28,7 +28,7 @@ class App extends React.Component {
     }
 
     checkSession() {
-        fetch('/user/check_session', {
+        fetch('/user/check_login', {
             method: 'POST',
             credentials: 'same-origin'
         }).then(resp => {
