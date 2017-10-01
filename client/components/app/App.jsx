@@ -15,6 +15,7 @@ import Header from "./header/Header";
 import Authentication from "./authentication/Authentication";
 import Main from "./main/Main";
 import Footer from './footer/Footer';
+import Loader from '../loader/Loader';
 
 class App extends React.Component {
     constructor(props) {
@@ -27,13 +28,14 @@ class App extends React.Component {
     }
 
     checkSession() {
-        fetch('/user/check_session').then(resp => {
-            console.log('login status', resp.json());
+        fetch('/user/check_session', {
+            method: 'POST',
+            credentials: 'same-origin'
+        }).then(resp => {
             return resp.json();
         }).then(resp => {
-            console.log('login status', resp);
-            // this.props.onCheckSession(resp);
-        })
+            this.props.onCheckSession(resp);
+        }).catch(err => console.error(err));
     }
 
     getUser() {
@@ -54,7 +56,7 @@ class App extends React.Component {
         })
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.checkSession();
     }
 

@@ -35,7 +35,7 @@ app.use(session({
 }));
 
 //middleware
-app.use(require('./middleware/loadUser'));
+// app.use(require('./middleware/loadUser'));
 
 //routes
 app.use('*', index);

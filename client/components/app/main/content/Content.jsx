@@ -14,7 +14,6 @@ class Content extends React.Component {
         super(props);
     }
     render() {
-        console.log(this.props.user);
         return (
             <section className="column col-8 col-xs-12">
                 {this.props.content === 'profile' && <Profile user={this.props.user}/>}
