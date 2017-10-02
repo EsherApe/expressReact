@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 //actions
 import {logout} from 'actions/loginActions';
 import {switchContent} from 'actions/contentActions';
+import {getUser} from 'actions/userActions';
 
 class Menu extends React.Component {
     constructor(props) {
@@ -17,7 +18,14 @@ class Menu extends React.Component {
     }
 
     userLogout() {
-        this.props.logout();
+        fetch('/logout', {
+            method: 'POST',
+            credentials: 'same-origin'
+        }).then(resp => {
+            return resp.json();
+        }).then(resp => {
+            this.props.onLogout(resp);
+        }).catch(err => console.error(err));
     }
 
     render() {
@@ -114,12 +122,10 @@ const mapDispatchToProps = dispatch => ({
     onSwitchPage: contentName => {
         dispatch(switchContent(contentName))
     },
-    logout: () => {
-        let userData = {
-            isLogin: false
-        };
-        dispatch(logout(userData))
-    }
+    onLogout: (resp) => {
+        dispatch(logout(resp));
+        dispatch(getUser({}));
+    },
 });
 
 export default connect(

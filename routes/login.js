@@ -25,7 +25,7 @@ router.post('/login', (req, res, next) => {
 
 router.post('/logout', (req, res, next) => {
     req.session.destroy();
-    console.log('logout');
+    res.send({isLogin: false, userId: null});
 });
 
 module.exports = router;

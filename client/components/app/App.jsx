@@ -72,7 +72,7 @@ class App extends React.Component {
             <div className='container grid-sm wrapper'>
                 <div className='main-wrapper'>
                     <Header/>
-                    {this.props.user.get('isLogin') ? <Main user={this.props.user}/> : <Authentication loginFn={this.props.login}/>}
+                    {this.props.user.get('isLogin') && this.props.isLogin ? <Main user={this.props.user}/> : <Authentication loginFn={this.props.login}/>}
                 </div>
                 <Footer/>
             </div>

@@ -8,7 +8,7 @@ const login = (resp) => {
 const logout = (resp) => {
     return {
         type: "LOG_OUT",
-        user: resp
+        login: resp
     }
 };
 
