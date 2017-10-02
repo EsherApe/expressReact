@@ -106,7 +106,7 @@ const mapStateToProps = state => ({
     content: state.content.get('contentName'),
     messages: state.messages.get('messagesList'),
     notifications: state.notifications.get('notificationsList'),
-    userId: state.users.get('showUserId'),
+    userId: state.viewedUser.get('userId'),
     user: state.user
 });
 

@@ -16,7 +16,7 @@ class UserPage extends React.Component {
         this.state = {
             user: [],
             userIsLoaded: false,
-            tabActive: 'chat'
+            tabActive: this.props.activeTab
         };
         this.fetchUsers = this.fetchUsers.bind(this);
     }
@@ -81,8 +81,9 @@ class UserPage extends React.Component {
     }
 }
 
-UserPage.propTypes = {
-    userId: PropTypes.number.isRequired
-};
+// UserPage.propTypes = {
+//     userId: PropTypes.number.isRequired,
+//     activeTab: PropTypes.string.isRequired
+// };
 
 export default UserPage;

@@ -5,10 +5,13 @@ const getUser = resp => {
     }
 };
 
-const showSelectedUser = userId => {
+const showSelectedUser = (activeTab, userId) => {
     return {
         type: "SHOW_SELECTED_USER",
-        userId: userId
+        data: {
+            activeTab,
+            userId
+        }
     }
 };
 

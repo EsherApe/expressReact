@@ -1,17 +1,18 @@
 import { Map } from 'immutable';
 
 const initialState = {
-    showUserId: null
+    activeTab: null,
+    userId: null
 };
 
-function users(state = Map(initialState), action) {
+function viewedUser(state = Map(initialState), action) {
     switch(action.type) {
         case 'SHOW_SELECTED_USER':
-            return state.set('showUserId', action.userId);
+            return state.merge(action.data);
             break;
     }
 
     return state;
 }
 
-export default users;
+export default viewedUser;

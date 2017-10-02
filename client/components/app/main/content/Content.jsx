@@ -20,7 +20,7 @@ class Content extends React.Component {
                 {this.props.content === 'messagesList' && <Messages messages={this.props.messages}/>}
                 {this.props.content === 'notificationsList' && <Notifications notifications={this.props.notifications}/>}
                 {this.props.content === 'settings' && <Settings/>}
-                {this.props.content === 'userPage' && <UserPage userId={this.props.userId}/>}
+                {this.props.content === 'userPage' && <UserPage userId={this.props.userId} activeTab={this.props.activeTab}/>}
             </section>
         )
     }
@@ -36,7 +36,8 @@ const mapStateToProps = state => ({
     content: state.content.get('contentName'),
     messages: state.messages.get('messagesList'),
     notifications: state.notifications.get('notificationsList'),
-    userId: state.users.get('showUserId')
+    userId: state.viewedUser.get('userId'),
+    activeTab: state.viewedUser.get('activeTab'),
 });
 
 const mapDispatchToProps = dispatch => ({});

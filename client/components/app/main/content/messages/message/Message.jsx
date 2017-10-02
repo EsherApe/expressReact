@@ -9,9 +9,9 @@ class Message extends React.Component {
         super(props);
     }
 
-    showUser(userPage, userId, e) {
+    showUser(userPage, activeTab, userId, e) {
         e.preventDefault();
-        this.props.onSwitchPage(userPage, userId);
+        this.props.onSwitchPage(userPage, activeTab, userId);
     }
 
     render() {
@@ -24,8 +24,8 @@ class Message extends React.Component {
                         </figure>
                     </div>
                     <div className="tile-content">
-                        <a href='#' onClick={this.showUser.bind(this, 'userPage', this.props.message.authorId)} className="tile-title">{this.props.message.author}</a>
-                        <p className="tile-subtitle text-gray">{this.props.message.text}</p>
+                        <a href='#' onClick={this.showUser.bind(this, 'userPage', 'profile', this.props.message.authorId)} className="tile-title">{this.props.message.author}</a>
+                        <p className="tile-subtitle text-gray" onClick={this.showUser.bind(this, 'userPage', 'chat', this.props.message.authorId)}>{this.props.message.text}</p>
                         <p>
                             <button className="btn btn-primary btn-sm mr-1">Join</button>
                             <button className="btn btn-sm bg-error text-light">Remove</button>
@@ -43,9 +43,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSwitchPage: (contentName, userId) => {
+    onSwitchPage: (contentName, activeTab, userId) => {
         dispatch(switchContent(contentName));
-        dispatch(showSelectedUser(userId));
+        dispatch(showSelectedUser(activeTab, userId));
     }
 });
 
