@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
 module.exports = {
     entry: __dirname + '/index.jsx',
@@ -31,7 +32,11 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.jsx', '.js']
+        extensions: ['.jsx', '.js'],
+        modules: [
+            path.resolve('.'),
+            path.resolve('./node_modules')
+        ]
     },
     plugins: [
         new ExtractTextPlugin('bundle.css')

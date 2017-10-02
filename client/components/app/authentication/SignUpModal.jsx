@@ -4,7 +4,7 @@ import 'whatwg-fetch';
 import { connect } from 'react-redux';
 
 //actions
-import {login} from '../../../actions/loginActions';
+import {login} from 'actions/loginActions';
 
 //components
 import FormErrors from './FormErrors';

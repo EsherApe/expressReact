@@ -1,6 +1,8 @@
 import React from 'react';
 import './message.scss';
 import { connect } from 'react-redux';
+import {switchContent} from 'actions/contentActions';
+import {showSelectedUser} from 'actions/userActions';
 
 class Message extends React.Component {
     constructor(props) {
@@ -9,7 +11,7 @@ class Message extends React.Component {
 
     showUser(userPage, userId, e) {
         e.preventDefault();
-        this.props.onSwitchPage(userPage, userId)
+        this.props.onSwitchPage(userPage, userId);
     }
 
     render() {
@@ -42,8 +44,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onSwitchPage: (contentName, userId) => {
-        dispatch({type: 'SWITCH_CONTENT', contentName: contentName});
-        dispatch({type: 'SHOW_USER', userId: userId});
+        dispatch(switchContent(contentName));
+        dispatch(showSelectedUser(userId));
     }
 });
 

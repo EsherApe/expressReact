@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 //actions
-import {logout} from '../../../../actions/loginActions';
-import {switchContent} from '../../../../actions/contentActions';
+import {logout} from 'actions/loginActions';
+import {switchContent} from 'actions/contentActions';
 
 class Menu extends React.Component {
     constructor(props) {

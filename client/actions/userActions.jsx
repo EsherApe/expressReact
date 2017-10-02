@@ -1,8 +1,15 @@
-const getUser = (resp) => {
+const getUser = resp => {
     return {
         type: "GET_USER",
         user: resp
     }
 };
 
-export {getUser}
+const showSelectedUser = userId => {
+    return {
+        type: "SHOW_SELECTED_USER",
+        userId: userId
+    }
+};
+
+export {getUser, showSelectedUser}

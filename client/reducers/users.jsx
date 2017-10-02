@@ -6,7 +6,7 @@ const initialState = {
 
 function users(state = Map(initialState), action) {
     switch(action.type) {
-        case 'SHOW_USER':
+        case 'SHOW_SELECTED_USER':
             return state.set('showUserId', action.userId);
             break;
     }

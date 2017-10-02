@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import 'whatwg-fetch';
 
 //actions
-import {login} from '../../actions/loginActions';
-import {getUser} from '../../actions/userActions';
+import {login} from 'actions/loginActions';
+import {getUser} from 'actions/userActions';
 
 //styles
 import './app.scss';
@@ -15,7 +15,7 @@ import Header from "./header/Header";
 import Authentication from "./authentication/Authentication";
 import Main from "./main/Main";
 import Footer from './footer/Footer';
-import Loader from '../loader/Loader';
+import Loader from 'components/loader/Loader';
 
 class App extends React.Component {
     constructor(props) {
