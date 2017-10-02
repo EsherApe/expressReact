@@ -53,8 +53,7 @@ router.post('/get_user', (req, res, next) => {
                 lastName: user.lastName,
                 firstName: user.firstName,
                 email: user.email,
-                birthday: user.birthday,
-                isLogin: true
+                birthday: user.birthday
             };
             res.send(respUser);
         } else {

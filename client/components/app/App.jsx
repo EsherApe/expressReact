@@ -40,7 +40,7 @@ class App extends React.Component {
 
     getUser() {
         let user = {
-            userId: this.props.userId
+            userId: this.props.data.userId
         };
         fetch('/user/get_user', {
             method: 'POST',
@@ -61,18 +61,22 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.isLogin && !this.state.userIsLoaded) {
+        if(this.props.data.isLogin && !this.state.userIsLoaded) {
             this.getUser();
             this.setState({userIsLoaded: true});
         }
     }
 
     render() {
+        console.log(this.props.data.user.get('id'), this.props.data.isLogin);
         return (
             <div className='container grid-sm wrapper'>
                 <div className='main-wrapper'>
                     <Header/>
-                    {this.props.user.get('isLogin') && this.props.isLogin ? <Main user={this.props.user}/> : <Authentication loginFn={this.props.login}/>}
+                    {this.props.data.user.get('id') && this.props.data.isLogin ?
+                        <Main data={this.props.data}/> :
+                        <Authentication loginFn={this.props.data.login}/>
+                    }
                 </div>
                 <Footer/>
             </div>
@@ -80,15 +84,25 @@ class App extends React.Component {
     }
 }
 
-App.propTypes = {
-    login: PropTypes.func.isRequired,
-    isLogin: PropTypes.bool.isRequired
-};
+// App.propTypes = {
+//     login: PropTypes.func.isRequired,
+//     isLogin: PropTypes.bool.isRequired,
+//     content: PropTypes.oneOf(['profile','messagesList','notificationsList','settings','userPage']).isRequired,
+//     messages: PropTypes.array.isRequired,
+//     notifications: PropTypes.array.isRequired
+// };
 
 const mapStateToProps = state => ({
-    isLogin: state.login.get('isLogin'),
-    userId: state.login.get('userId'),
-    user: state.user
+    data: {
+        isLogin: state.login.get('isLogin'),
+        userId: state.login.get('userId'),
+        user: state.user,
+        content: state.content.get('contentName'),
+        messages: state.messages.get('messagesList'),
+        notifications: state.notifications.get('notificationsList'),
+        viewedUserId: state.viewedUser.get('userId'),
+        activeTab: state.viewedUser.get('activeTab'),
+    }
 });
 
 const mapDispatchToProps = dispatch => ({

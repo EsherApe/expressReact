@@ -8,7 +8,7 @@ class Main extends React.Component {
         return (
             <main className="columns mt-3">
                 <Menu/>
-                <Content user={this.props.user}/>
+                <Content data={this.props.data}/>
             </main>
         )
     }
