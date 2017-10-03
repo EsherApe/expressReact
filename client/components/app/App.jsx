@@ -70,7 +70,7 @@ class App extends React.Component {
     render() {
         return (
             <div className='container grid-sm wrapper'>
-                <div className='main-wrapper'>
+                <div className='main-wrapper' style={{display: 'flex', flexDirection: 'column'}}>
                     <Header/>
                     <Main data={this.props.data}/>
                 </div>
