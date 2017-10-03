@@ -6,14 +6,16 @@ import Notifications from './notifications/Notifications';
 import Messages from './messages/Messages';
 import Settings from './settings/Settings';
 import UserPage from './userPage/UserPage';
+import Menu from '../menu/Menu';
 
-class Content extends React.Component {
+class UserContent extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
         return (
-            <section className="column col-8 col-xs-12">
+            <section className='columns'>
+                <Menu/>
                 {this.props.data.content === 'profile' && <Profile user={this.props.data.user}/>}
                 {this.props.data.content === 'messagesList' && <Messages messages={this.props.data.messages}/>}
                 {this.props.data.content === 'notificationsList' && <Notifications notifications={this.props.data.notifications}/>}
@@ -24,4 +26,4 @@ class Content extends React.Component {
     }
 }
 
-export default Content;
+export default UserContent;

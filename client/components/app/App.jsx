@@ -68,15 +68,11 @@ class App extends React.Component {
     }
 
     render() {
-        console.log(this.props.data.user.get('id'), this.props.data.isLogin);
         return (
             <div className='container grid-sm wrapper'>
                 <div className='main-wrapper'>
                     <Header/>
-                    {this.props.data.user.get('id') && this.props.data.isLogin ?
-                        <Main data={this.props.data}/> :
-                        <Authentication loginFn={this.props.data.login}/>
-                    }
+                    <Main data={this.props.data}/>
                 </div>
                 <Footer/>
             </div>

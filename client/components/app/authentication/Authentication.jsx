@@ -43,8 +43,8 @@ class Authentication extends React.Component {
 
     render() {
         return (
-            <div>
-                <section className='logIn-container'>
+            <section className='col-12'>
+                <div className='logIn-container'>
                     <div className="empty">
                         <div className="empty-icon">
                             <i className="icon icon-message" style={{fontSize: '2rem'}}> </i>
@@ -87,10 +87,10 @@ class Authentication extends React.Component {
                             <button className="btn btn-link" onClick={this.skipLogIn}>Skip</button>
                         </div>
                     </div>
-                </section>
+                </div>
                 {this.state.showLoginModal && <LogInModal closeModal={this.closeLogInModal}/>}
                 {this.state.showSignUpModal && <SignUpModal closeModal={this.closeSignUpModal}/>}
-            </div>
+            </section>
         )
     }
 }
