@@ -7,10 +7,10 @@ import Loader from "../../loader/Loader";
 class Main extends React.Component {
     render() {
         return (
-            <main className="mt-3" style={{flex: '1 0'}}>
+            <main className="main-container mt-3">
                 {this.props.data.user.get('id') && this.props.data.isLogin ?
                 <UserContent data={this.props.data}/> :
-                <Loader/>}
+                this.props.data.isLogin ? <Loader/> : <Authentication loginFn={this.props.data.login}/>}
             </main>
         )
     }

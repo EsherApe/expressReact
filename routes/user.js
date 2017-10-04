@@ -18,6 +18,7 @@ router.post('/save', (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         birthday: req.body.birthday,
+        gender: req.body.gender,
         password: req.body.password
     });
 
@@ -34,6 +35,7 @@ router.post('/save', (req, res) => {
                 lastName: user.lastName,
                 firstName: user.firstName,
                 email: user.email,
+                gender: req.body.gender,
                 birthday: user.birthday
             };
             res.send({text: 'User was successfully saved!', error: false, user: newUser});
@@ -53,9 +55,35 @@ router.post('/get_user', (req, res, next) => {
                 lastName: user.lastName,
                 firstName: user.firstName,
                 email: user.email,
+                gender: req.body.gender,
                 birthday: user.birthday
             };
             res.send(respUser);
+        } else {
+            next(createError(403, 'User not found'));
+        }
+    })
+});
+
+router.post('/search', (req, res, next) => {
+    User.find({login: req.body.login}, (err, resp) => {
+        if(err) return next(err);
+        return resp;
+    }).then(resp => {
+        if (resp) {
+            let users = [];
+            resp.forEach((user) => {
+                users.push({
+                    id: user._id,
+                    login: user.login,
+                    lastName: user.lastName,
+                    firstName: user.firstName,
+                    email: user.email,
+                    gender: user.gender,
+                    birthday: user.birthday
+                })
+            });
+            res.send(users);
         } else {
             next(createError(403, 'User not found'));
         }

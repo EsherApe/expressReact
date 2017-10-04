@@ -26,6 +26,9 @@ const schema = new Schema({
         type: Date,
         required: true
     },
+    gender: {
+        type: String
+    },
     hashedPassword: {
         type: String,
         required: true

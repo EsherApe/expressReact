@@ -70,7 +70,7 @@ class App extends React.Component {
     render() {
         return (
             <div className='container grid-sm wrapper'>
-                <div className='main-wrapper' style={{display: 'flex', flexDirection: 'column'}}>
+                <div className='main-wrapper'>
                     <Header/>
                     <Main data={this.props.data}/>
                 </div>
@@ -83,7 +83,7 @@ class App extends React.Component {
 // App.propTypes = {
 //     login: PropTypes.func.isRequired,
 //     isLogin: PropTypes.bool.isRequired,
-//     content: PropTypes.oneOf(['profile','messagesList','notificationsList','settings','userPage']).isRequired,
+//     content: PropTypes.oneOf(['profile','messagesList','notificationsList','settings', 'search','userPage']).isRequired,
 //     messages: PropTypes.array.isRequired,
 //     notifications: PropTypes.array.isRequired
 // };

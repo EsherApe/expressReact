@@ -31,22 +31,25 @@ function* createUsers() {
             lastName: 'Bazilskiy',
             password: '55801989',
             email: 'esher5580@gmail.com',
+            gender: 'male',
             birthday: '01.04.89 0:00:00 UTC'
         },
         {
-            login: 'esherape',
-            firstName: 'Andrew',
-            lastName: 'Bazilskiy',
+            login: 'tania',
+            firstName: 'Tania',
+            lastName: 'Kalashnik',
             password: '55801989',
-            email: 'andreyzlo@mail.ru',
+            email: 'kalashnik@gmail.com',
+            gender: 'female',
             birthday: '01.04.89 0:00:00 UTC'
         },
         {
-            login: 'admin',
-            firstName: 'Andrew',
-            lastName: 'Bazilskiy',
+            login: 'dima',
+            firstName: 'Dima',
+            lastName: 'BazilWBazilskiyskiy',
             password: '55801989',
-            email: 'admin@gmail.com',
+            email: 'dima@gmail.com',
+            gender: 'male',
             birthday: '01.04.89 0:00:00 UTC'
         }
     ].map(userData => {

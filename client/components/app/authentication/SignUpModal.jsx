@@ -152,8 +152,6 @@ class SignUpModal extends React.Component {
                 this.props.onSignUp(message.user);
                 this.closeModal();
             }
-
-            console.log(message);
         }).catch(console.error);
     }
 

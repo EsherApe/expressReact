@@ -80,6 +80,13 @@ class Menu extends React.Component {
                         </a>
                     </li>
                     <li className="menu-item">
+                        <a href="#"
+                           className={this.props.content === 'search' ? 'active' : ''}
+                           onClick={this.openMenuItem.bind(this, 'search')}>
+                            Search
+                        </a>
+                    </li>
+                    <li className="menu-item">
                         <a href="#" onClick={this.userLogout.bind(this)}>
                             Logout
                         </a>
