@@ -66,28 +66,40 @@ router.post('/get_user', (req, res, next) => {
 });
 
 router.post('/search', (req, res, next) => {
-    User.find({login: req.body.login}, (err, resp) => {
-        if(err) return next(err);
-        return resp;
-    }).then(resp => {
-        if (resp) {
-            let users = [];
-            resp.forEach((user) => {
-                users.push({
-                    id: user._id,
-                    login: user.login,
-                    lastName: user.lastName,
-                    firstName: user.firstName,
-                    email: user.email,
-                    gender: user.gender,
-                    birthday: user.birthday
-                })
-            });
-            res.send(users);
-        } else {
-            next(createError(403, 'User not found'));
-        }
-    })
+    let name = req.body.name.toLowerCase().replace(/\s/g,'');
+
+    console.log(name);
+
+    User.aggregate(
+        {$project:{
+            fullName:{
+                $substr: [{$concat:[{$toLower: "$firstName"}, {$toLower: "$lastName"}]}, 0, name.length]
+            },
+            fullNameReverse:{
+                $substr: [{$concat:[{$toLower: "$lastName"}, {$toLower: "$firstName"}]}, 0, name.length]
+            },
+            avatar: '$avatar',
+            login: '$login',
+            lastName: '$lastName',
+            firstName: '$firstName',
+            email: '$email',
+            gender: '$gender',
+            birthday: '$birthday'
+        }},
+        {$match: {$or: [{fullName: name}, {fullNameReverse: name}]}}
+    ).then(resp => {
+        let matches = [];
+        resp.forEach(user => {
+            matches.push({
+                login: user.login,
+                avatar: user.avatar,
+                fullName: `${user.firstName} ${user.lastName}`
+            })
+        });
+
+        res.send(matches);
+
+    });
 });
 
 module.exports = router;

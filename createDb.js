@@ -26,6 +26,7 @@ function* createUsers() {
 
     let userPromises = [
         {
+            avatar: '/static/img/avatar-0.png',
             login: 'esher',
             firstName: 'Andrew',
             lastName: 'Bazilskiy',
@@ -35,7 +36,7 @@ function* createUsers() {
             birthday: '01.04.89 0:00:00 UTC'
         },
         {
-            login: 'tania',
+            login: '/static/img/avatar-3.png',
             firstName: 'Tania',
             lastName: 'Kalashnik',
             password: '55801989',
@@ -44,9 +45,9 @@ function* createUsers() {
             birthday: '01.04.89 0:00:00 UTC'
         },
         {
-            login: 'dima',
+            login: '/static/img/avatar-1.png',
             firstName: 'Dima',
-            lastName: 'BazilWBazilskiyskiy',
+            lastName: 'Bazilskiy',
             password: '55801989',
             email: 'dima@gmail.com',
             gender: 'male',

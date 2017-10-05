@@ -4,6 +4,10 @@ const mongoose = require('../utils/mongoose'),
       Schema = mongoose.Schema;
 
 const schema = new Schema({
+    avatar: {
+        type: String,
+        default: '/static/img/avatar-2.png'
+    },
     login: {
         type: String,
         unique: true,

@@ -47,7 +47,7 @@ app.use((err, req, res, next) => {
     if (res.headersSent) {
         return next(err);
     }
-    res.send(500);
+    res.sendStatus(500);
 });
 
 //port settings
