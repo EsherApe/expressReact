@@ -1,5 +1,11 @@
 import React from 'react';
 import 'whatwg-fetch';
+import {connect} from 'react-redux';
+import {switchContent} from 'actions/contentActions';
+import {showSelectedUser} from 'actions/userActions';
+
+//components
+import Loader from 'components/loader/Loader';
 
 class Search extends React.Component {
     constructor(props) {
@@ -30,10 +36,17 @@ class Search extends React.Component {
                 }).then(resp => {
                     this.setState({users: resp})
                 }).catch(err => console.error(err));
+            } else {
+                this.setState({users: []})
             }
         }, 800);
 
         this.setState({time: timeout});
+    }
+
+    showUser(userPage, activeTab, userId, e) {
+        e.preventDefault();
+        this.props.onSwitchPage(userPage, activeTab, userId);
     }
 
     render() {
@@ -42,12 +55,10 @@ class Search extends React.Component {
                 <form className='form-horizontal' action=''>
                     <div className='panel profile-panel'>
                         <div className='panel-header text-center'>
-                            Search user
-                        </div>
-                        <div className='panel-body'>
+                            <p className='text-primary'>Start enters the name</p>
                             <div className='form-group'>
                                 <div className='col-3'>
-                                    <label className='form-label' htmlFor='search-user-name'>Name</label>
+                                    <label className='form-label' htmlFor='search-user-name'>Search</label>
                                 </div>
                                 <div className='col-9'>
                                     <input className='form-input' type='text'
@@ -58,7 +69,9 @@ class Search extends React.Component {
                                     />
                                 </div>
                             </div>
-                            <hr/>
+                            <div className="divider"> </div>
+                        </div>
+                        <div className='panel-body' style={{position: 'relative'}}>
                             {this.state.users ? this.state.users.map((user, i) => {
                                 return (
                                     <div className="tile" key={i}>
@@ -68,12 +81,11 @@ class Search extends React.Component {
                                             </figure>
                                         </div>
                                         <div className="tile-content">
-                                            <p className="tile-title"><a href="#">{user.fullName}</a></p>
-                                            <p className="tile-subtitle text-gray">Earth's Mightiest Heroes...</p>
+                                            <p className="tile-title"><a href="#" onClick={this.showUser.bind(this, 'userPage', 'chat', user.authorId)}>{user.fullName}</a></p>
+                                            <p className="tile-subtitle text-gray">{user.location}</p>
                                         </div>
                                         <div className="tile-action">
-                                            <button className="btn btn-sm btn-primary">Join</button>
-                                            <button className="btn btn-sm">Contact</button>
+                                            <button className="btn btn-sm btn-success">Add</button>
                                         </div>
                                     </div>
                                 )
@@ -114,4 +126,18 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+const mapStateToProps = state => ({
+    content: state.content.get('contentName')
+});
+
+const mapDispatchToProps = dispatch => ({
+    onSwitchPage: (contentName, activeTab, userId) => {
+        dispatch(switchContent(contentName));
+        dispatch(showSelectedUser(activeTab, userId));
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Search);

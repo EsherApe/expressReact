@@ -17,7 +17,17 @@ body,
   flex: 1 0 auto;
 }
 
+.tile-title {
+  margin-bottom: 0.5rem;
+}
+
 // Helpers
 .mt-3 {
   margin-top: 3rem;
+}
+
+.btn-success {
+  background: #32b643;
+  color: #ffffff;
+  border: #ffffff;
 }

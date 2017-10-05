@@ -33,6 +33,7 @@ function* createUsers() {
             password: '55801989',
             email: 'esher5580@gmail.com',
             gender: 'male',
+            location: 'Odessa, Levitana 15/4',
             birthday: '01.04.89 0:00:00 UTC'
         },
         {
@@ -42,6 +43,7 @@ function* createUsers() {
             password: '55801989',
             email: 'kalashnik@gmail.com',
             gender: 'female',
+            location: 'Odessa, Levitana 15/4',
             birthday: '01.04.89 0:00:00 UTC'
         },
         {
@@ -51,6 +53,7 @@ function* createUsers() {
             password: '55801989',
             email: 'dima@gmail.com',
             gender: 'male',
+            location: 'Odessa, Tereshkovoi 8a',
             birthday: '01.04.89 0:00:00 UTC'
         }
     ].map(userData => {

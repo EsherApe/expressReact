@@ -84,6 +84,7 @@ router.post('/search', (req, res, next) => {
             firstName: '$firstName',
             email: '$email',
             gender: '$gender',
+            location: '$location',
             birthday: '$birthday'
         }},
         {$match: {$or: [{fullName: name}, {fullNameReverse: name}]}}
@@ -93,8 +94,11 @@ router.post('/search', (req, res, next) => {
             matches.push({
                 login: user.login,
                 avatar: user.avatar,
+                location: user.location,
                 fullName: `${user.firstName} ${user.lastName}`
-            })
+            });
+
+            console.log(matches);
         });
 
         res.send(matches);
