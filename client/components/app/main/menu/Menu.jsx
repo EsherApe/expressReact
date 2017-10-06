@@ -35,10 +35,10 @@ class Menu extends React.Component {
                     <li className="menu-item">
                         <div className="tile tile-centered">
                             <div className="tile-icon">
-                                <img src="/static/img/avatar-2.png" className="avatar" alt="Avatar"/>
+                                <img src={this.props.user.get('avatar')} className="avatar" alt="Avatar"/>
                             </div>
                             <div className="tile-content">
-                                Bruce Banner
+                                {this.props.user.get('fullName')}
                             </div>
                         </div>
                     </li>

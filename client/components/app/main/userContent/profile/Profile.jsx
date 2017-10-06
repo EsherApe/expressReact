@@ -25,9 +25,9 @@ class Profile extends React.Component {
                 <div className="panel profile-panel">
                     <div className="panel-header text-center">
                         <figure className="avatar avatar-lg">
-                            <img src="/static/img/avatar-2.png" alt="Avatar"/>
+                            <img src={this.props.user.get('avatar')} alt="Avatar"/>
                         </figure>
-                        <div className="panel-title h5 mt-10">{this.props.user.get('firstName')} {this.props.user.get('lastName')}</div>
+                        <div className="panel-title h5 mt-10">{this.props.user.get('fullName')}</div>
                         <div className="panel-subtitle">{this.props.user.get('login').toUpperCase()}</div>
                     </div>
                     <nav className="panel-nav">
@@ -55,7 +55,7 @@ class Profile extends React.Component {
                     <div className="panel-body">
                         {this.state.activeTab === 'contacts' && <Contacts contacts={this.props.user}/>}
                         {this.state.activeTab === 'personalInfo' && <PersonalInfo info={this.props.user}/>}
-                        {this.state.activeTab === 'friends' && <Friends/>}
+                        {this.state.activeTab === 'friends' && <Friends friends={this.props.user}/>}
                     </div>
                     <div className="panel-footer">
                         <button className="btn btn-primary btn-block">Save</button>

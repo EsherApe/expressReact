@@ -81,8 +81,9 @@ class Search extends React.Component {
                                             </figure>
                                         </div>
                                         <div className="tile-content">
-                                            <p className="tile-title"><a href="#" onClick={this.showUser.bind(this, 'userPage', 'chat', user.authorId)}>{user.fullName}</a></p>
-                                            <p className="tile-subtitle text-gray">{user.location}</p>
+                                            <div className=""><a href="#" onClick={this.showUser.bind(this, 'userPage', 'chat', user.userId)}>{user.fullName}</a></div>
+                                            <div className="tile-subtitle text-gray">{user.about}</div>
+                                            <small><a href="#" className='text-secondary'>{user.location}</a></small>
                                         </div>
                                         <div className="tile-action">
                                             <button className="btn btn-sm btn-success">Add</button>
@@ -90,34 +91,9 @@ class Search extends React.Component {
                                     </div>
                                 )
                             }) : null}
-                            {/*<div className='form-group'>
-                                <div className='col-3'>
-                                    <label className='form-label' htmlFor='search-user-email'>Email</label>
-                                </div>
-                                <div className='col-9'>
-                                    <input className='form-input' type='email' id='search-user-email' placeholder='Email' ref='searchUserEmail'/>
-                                </div>
-                            </div>
-                            <div className='form-group'>
-                                <div className='col-3'>
-                                    <label className='form-label'>Gender</label>
-                                </div>
-                                <div className='col-9'>
-                                    <label className='form-radio'>
-                                        <input type='radio' name='searchUserGender'/>
-                                        <i className='form-icon' value='male'> </i> Male
-                                    </label>
-                                    <label className='form-radio'>
-                                        <input type='radio' name='searchUserGender'/>
-                                        <i className='form-icon' value='female'> </i> Female
-                                    </label>
-                                </div>
-                            </div>*/}
-
                         </div>
                         <div className='panel-footer'>
-                            {/*<button className='btn btn-primary' type='submit'>Search</button>*/}
-                            {/*<button className='btn btn-link' type='reset'>Cancel</button>*/}
+
                         </div>
                     </div>
                 </form>

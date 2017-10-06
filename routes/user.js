@@ -44,6 +44,7 @@ router.post('/save', (req, res) => {
 });
 
 router.post('/get_user', (req, res, next) => {
+    console.log(req.body.userId);
     User.findById(req.body.userId, (err, user) => {
         if(err) return next(err);
         return user;
@@ -54,8 +55,13 @@ router.post('/get_user', (req, res, next) => {
                 login: user.login,
                 lastName: user.lastName,
                 firstName: user.firstName,
+                fullName: `${user.firstName} ${user.lastName}`,
                 email: user.email,
                 gender: req.body.gender,
+                avatar: user.avatar,
+                about: user.about,
+                location: user.location,
+                messengers: user.messengers,
                 birthday: user.birthday
             };
             res.send(respUser);
@@ -68,8 +74,6 @@ router.post('/get_user', (req, res, next) => {
 router.post('/search', (req, res, next) => {
     let name = req.body.name.toLowerCase().replace(/\s/g,'');
 
-    console.log(name);
-
     User.aggregate(
         {$project:{
             fullName:{
@@ -78,23 +82,24 @@ router.post('/search', (req, res, next) => {
             fullNameReverse:{
                 $substr: [{$concat:[{$toLower: "$lastName"}, {$toLower: "$firstName"}]}, 0, name.length]
             },
+            userId: '$_id',
             avatar: '$avatar',
             login: '$login',
             lastName: '$lastName',
             firstName: '$firstName',
-            email: '$email',
-            gender: '$gender',
-            location: '$location',
-            birthday: '$birthday'
+            about: '$about',
+            location: '$location'
         }},
         {$match: {$or: [{fullName: name}, {fullNameReverse: name}]}}
     ).then(resp => {
         let matches = [];
         resp.forEach(user => {
             matches.push({
+                userId: user.userId,
                 login: user.login,
                 avatar: user.avatar,
                 location: user.location,
+                about: user.about,
                 fullName: `${user.firstName} ${user.lastName}`
             });
 

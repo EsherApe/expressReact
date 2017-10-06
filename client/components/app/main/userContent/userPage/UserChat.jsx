@@ -11,12 +11,12 @@ class UserChat extends React.Component {
                     <div className="tile">
                         <div className="tile-icon">
                             <figure className="avatar">
-                                <img src="/static/img/avatar-1.png" alt="Avatar"/>
+                                <img src={this.props.user.avatar} alt="Avatar"/>
                             </figure>
                         </div>
                         <div className="tile-content">
-                            <p className="tile-title">Thor Odinson</p>
-                            <p className="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
+                            <p className="tile-title">{this.props.user.firstName} {this.props.user.lastName}</p>
+                            <p className="tile-subtitle">{this.props.user.about}</p>
                         </div>
                     </div>
                     <div className="tile">

@@ -34,27 +34,44 @@ function* createUsers() {
             email: 'esher5580@gmail.com',
             gender: 'male',
             location: 'Odessa, Levitana 15/4',
-            birthday: '01.04.89 0:00:00 UTC'
+            about: 'Web-developer at WebWay',
+            messengers: {
+                skype: 'andrew.bazilskiy',
+                telegram: '@bazilskiy'
+            },
+            birthday: new Date('04/01/1989')
         },
         {
-            login: '/static/img/avatar-3.png',
+            avatar: '/static/img/avatar-3.png',
+            login: 'Zhuk',
             firstName: 'Tania',
             lastName: 'Kalashnik',
             password: '55801989',
             email: 'kalashnik@gmail.com',
             gender: 'female',
             location: 'Odessa, Levitana 15/4',
-            birthday: '01.04.89 0:00:00 UTC'
+            about: 'Footwear designer at "Welfare"',
+            messengers: {
+                skype: 'tania.kalashnik',
+                telegram: '@kalashnik'
+            },
+            birthday: new Date('01/24/1990')
         },
         {
-            login: '/static/img/avatar-1.png',
+            avatar: '/static/img/avatar-1.png',
+            login: 'Slash',
             firstName: 'Dima',
             lastName: 'Bazilskiy',
             password: '55801989',
             email: 'dima@gmail.com',
             gender: 'male',
             location: 'Odessa, Tereshkovoi 8a',
-            birthday: '01.04.89 0:00:00 UTC'
+            about: 'Student at "ONAFT"',
+            messengers: {
+                skype: 'dima.bazilskiy',
+                telegram: '@dimabazilskiy'
+            },
+            birthday: new Date('05/31/1997')
         }
     ].map(userData => {
         let user = new User(userData);

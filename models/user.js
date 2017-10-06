@@ -32,6 +32,11 @@ const schema = new Schema({
     },
     gender: String,
     location: String,
+    about: String,
+    messengers: {
+        skype: String,
+        telegram: String
+    },
     hashedPassword: {
         type: String,
         required: true
