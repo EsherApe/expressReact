@@ -55,7 +55,7 @@ class Profile extends React.Component {
                     <div className="panel-body">
                         {this.state.activeTab === 'contacts' && <Contacts contacts={this.props.user}/>}
                         {this.state.activeTab === 'personalInfo' && <PersonalInfo info={this.props.user}/>}
-                        {this.state.activeTab === 'friends' && <Friends friends={this.props.user}/>}
+                        {this.state.activeTab === 'friends' && <Friends user={this.props.user}/>}
                     </div>
                     <div className="panel-footer">
                         <button className="btn btn-primary btn-block">Save</button>

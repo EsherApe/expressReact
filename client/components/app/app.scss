@@ -26,8 +26,16 @@ body,
   margin-top: 3rem;
 }
 
+.btn-success,
+.btn-danger {
+  color: #fff;
+  border: #fff;
+}
+
 .btn-success {
   background: #32b643;
-  color: #ffffff;
-  border: #ffffff;
+}
+
+.btn-danger {
+  background: #e85600;
 }

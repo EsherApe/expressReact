@@ -39,6 +39,7 @@ function* createUsers() {
                 skype: 'andrew.bazilskiy',
                 telegram: '@bazilskiy'
             },
+            friends: [],
             birthday: new Date('04/01/1989')
         },
         {
@@ -55,6 +56,7 @@ function* createUsers() {
                 skype: 'tania.kalashnik',
                 telegram: '@kalashnik'
             },
+            friends: [],
             birthday: new Date('01/24/1990')
         },
         {
@@ -71,6 +73,7 @@ function* createUsers() {
                 skype: 'dima.bazilskiy',
                 telegram: '@dimabazilskiy'
             },
+            friends: [],
             birthday: new Date('05/31/1997')
         }
     ].map(userData => {

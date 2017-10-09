@@ -10,18 +10,9 @@ class PersonalInfo extends React.Component {
             birthday: moment(this.props.info.get('birthday')).format('LL'),
             about: this.props.info.get('about'),
         };
-        this.formatDate = this.formatDate.bind(this);
-    }
-
-    formatDate() {
-        console.log(moment);
-        let date = new Date(this.props.info.get('birthday'));
-
-        return date.getDate();
     }
 
     render() {
-        console.log();
         return (
             <div className='profile__contacts'>
                 <div className="tile tile-centered">

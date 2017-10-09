@@ -21,7 +21,7 @@ class UserContent extends React.Component {
                 {this.props.data.content === 'messagesList' && <Messages messages={this.props.data.messages}/>}
                 {this.props.data.content === 'notificationsList' && <Notifications notifications={this.props.data.notifications}/>}
                 {this.props.data.content === 'settings' && <Settings/>}
-                {this.props.data.content === 'search' && <Search/>}
+                {this.props.data.content === 'search' && <Search user={this.props.data.user}/>}
                 {this.props.data.content === 'userPage' && <UserPage userId={this.props.data.viewedUserId} activeTab={this.props.data.activeTab}/>}
             </section>
         )

@@ -62,6 +62,7 @@ router.post('/get_user', (req, res, next) => {
                 about: user.about,
                 location: user.location,
                 messengers: user.messengers,
+                friends: user.friends,
                 birthday: user.birthday
             };
             res.send(respUser);
@@ -109,6 +110,22 @@ router.post('/search', (req, res, next) => {
         res.send(matches);
 
     });
+});
+
+router.post('/add_to_friends', (req, res, next) => {
+
+    User.findByIdAndUpdate(
+        req.body.userId,
+        {$push: {"friends": req.body.userToFriends}},
+        {safe: true, upsert: true, new: true},
+        (err, user) => {
+            console.log(err);
+            let respUser = {
+                friends: user.friends
+            };
+            res.send(respUser)
+        }
+    );
 });
 
 module.exports = router;

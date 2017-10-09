@@ -37,6 +37,7 @@ const schema = new Schema({
         skype: String,
         telegram: String
     },
+    friends: Array,
     hashedPassword: {
         type: String,
         required: true
