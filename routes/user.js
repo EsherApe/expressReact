@@ -9,7 +9,6 @@ router.post('/check_login', (req, res, next) => {
 });
 
 router.post('/save', (req, res) => {
-    console.log(req.session);
     if (!req.body) return req.sendStatus(400);
 
     const user = new User({
@@ -44,7 +43,6 @@ router.post('/save', (req, res) => {
 });
 
 router.post('/get_user', (req, res, next) => {
-    console.log(req.body.userId);
     User.findById(req.body.userId, (err, user) => {
         if(err) return next(err);
         return user;
@@ -103,8 +101,6 @@ router.post('/search', (req, res, next) => {
                 about: user.about,
                 fullName: `${user.firstName} ${user.lastName}`
             });
-
-            console.log(matches);
         });
 
         res.send(matches);
@@ -119,13 +115,34 @@ router.post('/add_to_friends', (req, res, next) => {
         {$push: {"friends": req.body.userToFriends}},
         {safe: true, upsert: true, new: true},
         (err, user) => {
-            console.log(err);
+            if(err) console.log(err);
             let respUser = {
                 friends: user.friends
             };
             res.send(respUser)
         }
     );
+});
+
+router.post('/get_friends', (req, res, next) => {
+    User.find( { _id: { $in: req.body.friendsIds }}, (err, users) => {
+        if(err) console.log(err);
+        let friends = [];
+        users.forEach(user => {
+            friends.push({
+                userId: user._id,
+                login: user.login,
+                avatar: user.avatar,
+                location: user.location,
+                about: user.about,
+                fullName: `${user.firstName} ${user.lastName}`
+            });
+        });
+
+        console.log(friends);
+
+        res.send(friends);
+    } )
 });
 
 module.exports = router;
