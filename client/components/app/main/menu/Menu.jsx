@@ -131,7 +131,7 @@ const mapDispatchToProps = dispatch => ({
     },
     onLogout: (resp) => {
         dispatch(logout(resp));
-        dispatch(getUser({}));
+        dispatch(getUser(null));
     },
 });
 

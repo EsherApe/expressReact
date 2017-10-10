@@ -42,7 +42,6 @@ class Friends extends React.Component {
     }
 
     render() {
-        console.log(this.state.friends);
         return (
             <div className='profile__contacts'>
                 {this.state.friends.map((user, i) => {
