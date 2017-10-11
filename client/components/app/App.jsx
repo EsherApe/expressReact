@@ -61,13 +61,14 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.data.isLogin && !this.state.userIsLoaded) {
+        if(this.props.data.isLogin && !this.props.data.userIsLoaded) {
             this.getUser();
-            this.setState({userIsLoaded: true});
+            this.props.login({userIsLoaded: true});
         }
     }
 
     render() {
+        console.log();
         return (
             <div className='container grid-sm wrapper'>
                 <div className='main-wrapper'>
@@ -91,21 +92,19 @@ class App extends React.Component {
 const mapStateToProps = state => ({
     data: {
         isLogin: state.login.get('isLogin'),
+        userIsLoaded: state.login.get('userIsLoaded'),
         userId: state.login.get('userId'),
         user: state.user,
         content: state.content.get('contentName'),
         messages: state.messages.get('messagesList'),
         notifications: state.notifications.get('notificationsList'),
         viewedUserId: state.viewedUser.get('userId'),
-        activeTab: state.viewedUser.get('activeTab'),
+        activeTab: state.viewedUser.get('activeTab')
     }
 });
 
 const mapDispatchToProps = dispatch => ({
-    login: () => {
-        let status = {
-           isLogin: false
-        };
+    login: (status) => {
         dispatch(login(status));
     },
     onGetUser: resp => {

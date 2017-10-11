@@ -9,8 +9,8 @@ import {getUser} from 'actions/userActions';
 class Menu extends React.Component {
     constructor(props) {
         super(props);
-        this.newMessages = this.props.messages.filter(message => {return message.isNew});
-        this.newNotifications = this.props.notifications.filter(notification => {return notification.isNew});
+        this.newMessages = this.props.data.messages.filter(message => {return message.isNew});
+        this.newNotifications = this.props.data.notifications.filter(notification => {return notification.isNew});
     }
 
     openMenuItem(contentName) {
@@ -24,7 +24,14 @@ class Menu extends React.Component {
         }).then(resp => {
             return resp.json();
         }).then(resp => {
-            this.props.onLogout(resp);
+            if(!resp.error) {
+                let resp = {
+                    isLogin: false,
+                    userId: null,
+                    userIsLoaded: false
+                };
+                this.props.onLogout(resp);
+            }
         }).catch(err => console.error(err));
     }
 
@@ -35,53 +42,53 @@ class Menu extends React.Component {
                     <li className="menu-item">
                         <div className="tile tile-centered">
                             <div className="tile-icon">
-                                <img src={this.props.user.get('avatar')} className="avatar" alt="Avatar"/>
+                                <img src={this.props.data.user.get('avatar')} className="avatar" alt="Avatar"/>
                             </div>
                             <div className="tile-content">
-                                {this.props.user.get('fullName')}
+                                {this.props.data.user.get('fullName')}
                             </div>
                         </div>
                     </li>
                     <li className="divider"> </li>
                     <li className="menu-item">
                         <a href="#"
-                           className={this.props.content === 'profile' ? 'active' : ''}
+                           className={this.props.data.content === 'profile' ? 'active' : ''}
                            onClick={this.openMenuItem.bind(this, 'profile')}>
                             My profile
                         </a>
                     </li>
                     <li className="menu-item">
-                        {this.props.messages &&
+                        {this.props.data.messages &&
                         <div className="menu-badge">
                             <label className="label label-primary">{this.newMessages.length}</label>
                         </div>}
                         <a href="#"
-                           className={this.props.content === 'messages' ? 'active' : ''}
+                           className={this.props.data.content === 'messages' ? 'active' : ''}
                            onClick={this.openMenuItem.bind(this, 'messagesList')}>
                             Messages
                         </a>
                     </li>
                     <li className="menu-item">
-                        {this.props.notifications &&
+                        {this.props.data.notifications &&
                         <div className="menu-badge">
                             <label className="label label-primary">{this.newNotifications.length}</label>
                         </div>}
                         <a href="#"
-                           className={this.props.content === 'notifications' ? 'active' : ''}
+                           className={this.props.data.content === 'notifications' ? 'active' : ''}
                            onClick={this.openMenuItem.bind(this, 'notificationsList')}>
                             Notifications
                         </a>
                     </li>
                     <li className="menu-item">
                         <a href="#"
-                           className={this.props.content === 'settings' ? 'active' : ''}
+                           className={this.props.data.content === 'settings' ? 'active' : ''}
                            onClick={this.openMenuItem.bind(this, 'settings')}>
                             Settings
                         </a>
                     </li>
                     <li className="menu-item">
                         <a href="#"
-                           className={this.props.content === 'search' ? 'active' : ''}
+                           className={this.props.data.content === 'search' ? 'active' : ''}
                            onClick={this.openMenuItem.bind(this, 'search')}>
                             Search
                         </a>
@@ -118,11 +125,7 @@ class Menu extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    content: state.content.get('contentName'),
-    messages: state.messages.get('messagesList'),
-    notifications: state.notifications.get('notificationsList'),
-    userId: state.viewedUser.get('userId'),
-    user: state.user
+
 });
 
 const mapDispatchToProps = dispatch => ({

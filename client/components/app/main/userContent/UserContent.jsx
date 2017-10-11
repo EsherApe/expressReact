@@ -16,7 +16,7 @@ class UserContent extends React.Component {
     render() {
         return (
             <section className='columns'>
-                <Menu/>
+                <Menu data={this.props.data}/>
                 {this.props.data.content === 'profile' && <Profile user={this.props.data.user}/>}
                 {this.props.data.content === 'messagesList' && <Messages messages={this.props.data.messages}/>}
                 {this.props.data.content === 'notificationsList' && <Notifications notifications={this.props.data.notifications}/>}

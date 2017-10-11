@@ -60,7 +60,7 @@ class Friends extends React.Component {
                                 <small><a href="#" className='text-secondary'>{user.location}</a></small>
                             </div>
                             <div className="tile-action">
-                                <button className="btn btn-sm btn-danger">Remove</button>
+                                <button className='btn btn-link btn-action btn-sm'><i className="icon icon-cross text-error"> </i></button>
                             </div>
                         </div>
                     )

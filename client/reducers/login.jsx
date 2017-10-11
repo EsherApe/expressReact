@@ -1,7 +1,9 @@
 import { Map } from 'immutable';
 
 const initialState = Map({
-    isLogin: false
+    isLogin: false,
+    userId: null,
+    userIsLoaded: false
 });
 
 function login(state = initialState, action) {
