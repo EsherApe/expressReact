@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require('http');
 const morgan = require('morgan');
 const logger = require('./utils/winston');
 const bodyParser = require('body-parser');
@@ -52,4 +53,13 @@ app.use((err, req, res, next) => {
 
 //port settings
 const PORT = process.env.PORT || config.get('port');
-app.listen(PORT, () => logger.info(`listening on port ${PORT}`));
+const server = http.createServer(app);
+server.listen(PORT, () => logger.info(`listening on port ${PORT}`));
+const io = require('socket.io')(server);
+
+io.on('connection', socket => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
